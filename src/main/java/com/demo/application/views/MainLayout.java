@@ -70,6 +70,11 @@ public class MainLayout extends AppLayout {
 
     public MainLayout() {
         addToNavbar(createHeaderContent());
+        Div header = new Div();
+        header.getStyle().set("width", "100vw");
+        header.getStyle().set("height", "30vw");
+
+        header.getStyle().set("background-color", "black");
     }
 
     private Component createHeaderContent() {
