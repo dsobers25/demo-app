@@ -1,1 +1,38 @@
 @import url('./main-layout.css');
+
+
+.nav-link {
+    background: none;
+}
+
+.nav-link:active {
+    border-bottom: 2px solid orange;
+    background: none;
+}
+
+.logo {
+    position: relative;
+    display: inline-block;
+    left: 0;
+}
+
+.nav-middle-items {
+    display: flex;
+    /* other styles */
+}
+
+@media screen and (max-width: 1023px) {
+    .nav-middle-items {
+        display: none !important;
+    }
+}
+
+.side-menu {
+    display: flex;
+}
+
+@media screen and (min-width: 1023px) {
+    .side-menu {
+        display: none !important;
+    }
+}
