@@ -36,6 +36,7 @@ public class HomeView extends VerticalLayout {
 
     private Component leftSideContent() {
         var leftContainer = new Div("something on the left");
+        leftContainer.addClassName("left-container");
         leftContainer.getStyle().set("width", "30vw")
                                 .set("height", "100vw")
                                 .set("background", "#F7F8F9");
@@ -45,7 +46,8 @@ public class HomeView extends VerticalLayout {
 
     private Component rightSideContent() {
         var rightContainer = new Div("something on the right");
-        rightContainer.getStyle().set("width", "100vw")
+        rightContainer.addClassName("right-container");
+        rightContainer.getStyle().set("width", "70vw")
                                 .set("height", "100vw")
                                 .set("background", "#FFFFFF");
 
