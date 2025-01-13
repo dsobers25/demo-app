@@ -1,8 +1,11 @@
 package com.demo.application.views;
 
+import com.demo.application.header.DynamicHeader;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -15,24 +18,37 @@ public class HomeView extends VerticalLayout {
 
         setPadding(false);
         setSpacing(false);
-        getStyle().set("padding", "0");
-
-        Div headerr = new Div();
-        headerr.getStyle().set("padding", "0px");
-            headerr.getStyle().set("width", "100vw");
-            headerr.getStyle().set("height", "30vh");
-            headerr.getStyle().set("background-color", "#e7f5e9");
         
-        H1 pageGreeting = new H1("Welcome John!");
-        pageGreeting.getStyle().set("text-align", "center")
-        .set("margin-top", "70px");
-        Paragraph subText = new Paragraph("What can we do for you today?");
-        subText.getStyle().set("text-align", "center");
-        headerr.add(pageGreeting, subText);
-        add(headerr);
+        DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
+        add(header);
 
-        H1 words = new H1("hello");
-        add(words);
+        // H1 words = new H1("hello 2025");
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+
+        horizontalLayout.add(leftSideContent());
+        horizontalLayout.add(rightSideContent());
+
+        add(horizontalLayout);
+
+
         
+    }
+
+    private Component leftSideContent() {
+        var leftContainer = new Div("something on the left");
+        leftContainer.getStyle().set("width", "30vw")
+                                .set("height", "100vw")
+                                .set("background", "#F7F8F9");
+
+        return leftContainer;
+    }
+
+    private Component rightSideContent() {
+        var rightContainer = new Div("something on the right");
+        rightContainer.getStyle().set("width", "100vw")
+                                .set("height", "100vw")
+                                .set("background", "#FFFFFF");
+
+        return rightContainer;
     }
 }
