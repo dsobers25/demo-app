@@ -1,6 +1,7 @@
 package com.demo.application.views;
 
-import com.demo.application.header.DynamicHeader;
+import com.demo.application.views.header.DynamicHeader;
+import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
@@ -15,41 +16,43 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Home")
 public class HomeView extends VerticalLayout {
     public HomeView() {
-
+        // Remove padding and spacing
         setPadding(false);
         setSpacing(false);
+        setSizeFull(); // Make the view take full height
         
         DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        add(header);
-
-        // H1 words = new H1("hello 2025");
-        HorizontalLayout horizontalLayout = new HorizontalLayout();
-
-        horizontalLayout.add(leftSideContent());
-        horizontalLayout.add(rightSideContent());
-
-        add(horizontalLayout);
-
+        
+        // Create content wrapper for scrollable content
+        HorizontalLayout contentWrapper = new HorizontalLayout();
+        contentWrapper.setSizeFull();
+        contentWrapper.setSpacing(false);
+        contentWrapper.setPadding(false);
 
         
+        // Add left and right content
+        contentWrapper.add(SideNav.leftSideContent());
+        contentWrapper.add(rightSideContent());
+        
+        add(header, contentWrapper);
     }
 
-    private Component leftSideContent() {
-        var leftContainer = new Div("something on the left");
-        leftContainer.addClassName("left-container");
-        leftContainer.getStyle().set("width", "30vw")
-                                .set("height", "100vw")
-                                .set("background", "#F7F8F9");
-
-        return leftContainer;
-    }
+    
 
     private Component rightSideContent() {
         var rightContainer = new Div("something on the right");
         rightContainer.addClassName("right-container");
-        rightContainer.getStyle().set("width", "70vw")
-                                .set("height", "100vw")
-                                .set("background", "#FFFFFF");
+        rightContainer.getStyle()
+            .set("width", "70%")
+            .set("height", "100%")
+            .set("background", "#FFFFFF")
+            .set("overflow-y", "auto") // Enable vertical scrolling
+            .set("padding", "var(--lumo-space-m)");
+
+        // Add some test content to demonstrate scrolling
+        for (int i = 0; i < 20; i++) {
+            rightContainer.add(new Div("Scroll content " + i));
+        }
 
         return rightContainer;
     }

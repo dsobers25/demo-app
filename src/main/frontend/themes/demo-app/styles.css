@@ -39,16 +39,20 @@
 
 .right-container {
     display: flex;
+    flex-direction: column;
+    height: calc(100vh - 30vh); /* Subtract header height */
 }
 
 @media screen and (max-width: 1023px) {
     .right-container {
-        width: 100vw;
+        width: 100%;
     }
 }
 
 .left-container {
     display: flex;
+    flex-direction: column;
+    height: calc(100vh - 30vh); /* Subtract header height */
 }
 
 @media screen and (max-width: 1023px) {

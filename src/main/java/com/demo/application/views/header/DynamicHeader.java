@@ -1,4 +1,4 @@
-package com.demo.application.header;
+package com.demo.application.views.header;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
@@ -12,30 +12,31 @@ public class DynamicHeader extends Div {
     public DynamicHeader(String pageGreeting, String subText) {
         this.pageGreeting = pageGreeting;
         this.subText = subText;
-        
         configureHeader();
     }
 
     private void configureHeader() {
-        // Configure the header div (this)
         getStyle()
             .set("padding", "0px")
-            .set("width", "100vw")
+            .set("width", "100%")
             .set("height", "30vh")
-            .set("background-color", "#e7f5e9");
+            .set("min-height", "200px")
+            .set("background-color", "#e7f5e9")
+            .set("position", "sticky")  // Make header sticky
+            .set("top", "0")
+            .set("z-index", "100");     // Ensure header stays on top
 
-        // Create and configure greeting
         H1 greeting = new H1(pageGreeting);
         greeting.getStyle()
             .set("text-align", "center")
-            .set("margin-top", "70px");
+            .set("margin-top", "70px")
+            .set("margin-bottom", "0");
 
-        // Create and configure subtext
         Paragraph subTextParagraph = new Paragraph(subText);
         subTextParagraph.getStyle()
-            .set("text-align", "center");
+            .set("text-align", "center")
+            .set("margin-top", "1rem");
 
-        // Add components to this div
         add(greeting, subTextParagraph);
     }
 }
