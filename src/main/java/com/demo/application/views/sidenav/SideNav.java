@@ -22,9 +22,12 @@ public class SideNav {
 
     }
 
-    private static void pageMapper(HorizontalLayout homeHeader, HorizontalLayout virtualHomeHeader) {
-            menuItems.put("", homeHeader); // homepage
-            menuItems.put("virtual-healthcare", virtualHomeHeader);
+    private static void pageMapper(HorizontalLayout homeSideItemLayout, HorizontalLayout virtualHealthcareSideItemLayout,
+    HorizontalLayout behavioralSideItemLayout, HorizontalLayout labsSideItemLayout) {
+            menuItems.put("", homeSideItemLayout); // homepage
+            menuItems.put("virtual-healthcare", virtualHealthcareSideItemLayout);
+            menuItems.put("behavioral-healthcare", behavioralSideItemLayout);
+            menuItems.put("labs", labsSideItemLayout);
         }
 
         private static void updateActiveMenuItem(String location) {
@@ -58,8 +61,8 @@ public class SideNav {
             //     leftContainer.add(new Div("Scroll content " + i));
             // }
     
-            Div home = new Div();
-            HorizontalLayout homeHeader = new HorizontalLayout();
+            Div homeDiv = new Div();
+            HorizontalLayout homeSideItemLayout = new HorizontalLayout();
     
             // Create a container div for the text content with orange left border
             Div textContainer = new Div();
@@ -67,9 +70,9 @@ public class SideNav {
             textContainer.getStyle().set("padding-left", "8px")
                 .set("width", "100%");  // Make text container take full width
     
-            Paragraph homeParagraph = new Paragraph("Home");
+            Paragraph homeMainText = new Paragraph("Home");
             Icon arrow = new Icon(VaadinIcon.ARROW_RIGHT);
-            Paragraph homeText = new Paragraph("Start here");
+            Paragraph homeSubText = new Paragraph("Start here");
     
             // Style the arrow
             arrow.getStyle()
@@ -77,27 +80,26 @@ public class SideNav {
                 .set("margin-top", "10px");
     
             // Style the paragraph
-            homeParagraph.getStyle()
+            homeMainText.getStyle()
                 .set("font-size", "16px")
                 .set("margin-bottom", "0px");
     
-            homeText.getStyle()
+            homeSubText.getStyle()
                 .set("font-size", "12px")
                 .set("margin-top", "0px");
     
             // Add both paragraphs to the text container
-            textContainer.add(homeParagraph, homeText);
+            textContainer.add(homeMainText, homeSubText);
     
             // Configure the HorizontalLayout
-            homeHeader.setWidthFull();
-            homeHeader.setJustifyContentMode(JustifyContentMode.BETWEEN);
-            homeHeader.setAlignItems(Alignment.CENTER);
-            homeHeader.add(textContainer, arrow);  // Add textContainer instead of homeParagraph
-    
-            home.add(homeHeader);
+            homeSideItemLayout.setWidthFull();
+            homeSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            homeSideItemLayout.setAlignItems(Alignment.CENTER);
+            homeSideItemLayout.add(textContainer, arrow);  // Add textContainer instead of homeParagraph
+            homeDiv.add(homeSideItemLayout);
             
             // Single click listener for home section
-            Component[] homeComponents = {home, homeHeader, textContainer, homeParagraph, homeText, arrow};
+            Component[] homeComponents = {homeDiv, homeSideItemLayout, textContainer, homeMainText, homeSubText, arrow};
             for (Component component : homeComponents) {
                 component.getElement().addEventListener("click", e -> {
                     UI.getCurrent().navigate("");
@@ -110,14 +112,10 @@ public class SideNav {
                 UI.getCurrent().navigate("");
                 String location = UI.getCurrent().getInternals().getActiveViewLocation().getPathWithQueryParameters();
                 updateActiveMenuItem(location);
-            });
-
-            
-
-            
+            });          
     
-            Div virtualHome = new Div();
-            HorizontalLayout virtualHomeHeader = new HorizontalLayout();
+            Div virtualHealthcareDiv = new Div();
+            HorizontalLayout virtualHealthcareSideItemLayout = new HorizontalLayout();
     
             // Create a container div for the text content with orange left border
             Div textContainer2 = new Div();
@@ -125,9 +123,9 @@ public class SideNav {
                 // .set("border-left", "9px solid orange")
                 .set("padding-left", "8px");  // Add some spacing between border and text
     
-            Paragraph virtualHomeParagraph = new Paragraph("Virtual Healthcare");
+            Paragraph virtualHealthcareMainText = new Paragraph("Virtual Healthcare");
             Icon arrow2 = new Icon(VaadinIcon.ARROW_RIGHT);
-            Paragraph virtualHomeText = new Paragraph("Access doctors online");
+            Paragraph virtualHealthcareSubText = new Paragraph("Access doctors online");
     
             // Style the arrow
             arrow2.getStyle()
@@ -135,26 +133,26 @@ public class SideNav {
                 .set("margin-top", "10px");
     
             // Style the paragraph
-            virtualHomeParagraph.getStyle()
+            virtualHealthcareMainText.getStyle()
                 .set("font-size", "16px")
                 .set("margin-bottom", "0px");
     
-            virtualHomeText.getStyle()
+            virtualHealthcareSubText.getStyle()
                 .set("font-size", "12px")
                 .set("margin-top", "0px");
     
             // Add both paragraphs to the text container
-            textContainer2.add(virtualHomeParagraph, virtualHomeText);
+            textContainer2.add(virtualHealthcareMainText, virtualHealthcareSubText);
             // Configure the HorizontalLayout
-            virtualHomeHeader.setWidthFull();
-            virtualHomeHeader.setJustifyContentMode(JustifyContentMode.BETWEEN);
-            virtualHomeHeader.setAlignItems(Alignment.CENTER);
-            virtualHomeHeader.add(textContainer2, arrow2);  // Add textContainer instead of homeParagraph
-            virtualHome.add(virtualHomeHeader);
+            virtualHealthcareSideItemLayout.setWidthFull();
+            virtualHealthcareSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            virtualHealthcareSideItemLayout.setAlignItems(Alignment.CENTER);
+            virtualHealthcareSideItemLayout.add(textContainer2, arrow2);  // Add textContainer instead of homeParagraph
+            virtualHealthcareDiv.add(virtualHealthcareSideItemLayout);
 
         // Single click listener for virtual healthcare section
-        Component[] virtualComponents = {virtualHome, virtualHomeHeader, textContainer2, 
-            virtualHomeParagraph, virtualHomeText, arrow2};
+        Component[] virtualComponents = {virtualHealthcareDiv, virtualHealthcareSideItemLayout, textContainer2, 
+            virtualHealthcareMainText, virtualHealthcareSubText, arrow2};
 
         for (Component component : virtualComponents) {
             component.getElement().addEventListener("click", e -> {
@@ -163,11 +161,115 @@ public class SideNav {
         }).addEventData("event.stopPropagation()");
         }
 
+        Div behavioralHealthcareDiv = new Div();
+
+        HorizontalLayout behavioralSideItemLayout = new HorizontalLayout();
+    
+            // Create a container div for the text content with orange left border
+            Div textContainer3 = new Div();
+            textContainer3.getStyle()
+                // .set("border-left", "9px solid orange")
+                .set("padding-left", "8px");  // Add some spacing between border and text
+    
+            Paragraph behaviroalMainText = new Paragraph("Behavioral Healthcare");
+            Icon arrow3 = new Icon(VaadinIcon.ARROW_RIGHT);
+            Paragraph behaviroalSubText = new Paragraph("Access counselors online");
+    
+            // Style the arrow
+            arrow3.getStyle()
+                .set("font-size", "10px")
+                .set("margin-top", "10px");
+    
+            // Style the paragraph
+            behaviroalMainText.getStyle()
+                .set("font-size", "16px")
+                .set("margin-bottom", "0px");
+    
+            behaviroalSubText.getStyle()
+                .set("font-size", "12px")
+                .set("margin-top", "0px");
+    
+            // Add both paragraphs to the text container
+            textContainer3.add(behaviroalMainText, behaviroalSubText);
+            // Configure the HorizontalLayout
+            behavioralSideItemLayout.setWidthFull();
+            behavioralSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            behavioralSideItemLayout.setAlignItems(Alignment.CENTER);
+            behavioralSideItemLayout.add(textContainer3, arrow3);  // Add textContainer instead of homeParagraph
+            behavioralHealthcareDiv.add(behavioralSideItemLayout);
+
+        // Single click listener for virtual healthcare section
+        Component[] behavioralHealthcareComponents = {behavioralHealthcareDiv, behavioralSideItemLayout, textContainer3, 
+            behaviroalMainText, behaviroalSubText, arrow3};
+
+        for (Component component : behavioralHealthcareComponents) {
+            component.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("behavioral-healthcare");
+            updateActiveMenuItem("behavioral-healthcare");
+        }).addEventData("event.stopPropagation()");
+        }
+
+        Div labsDiv = new Div();
+
+        HorizontalLayout labsSideItemLayout = new HorizontalLayout();
+            // Create a container div for the text content with orange left border
+            Div textContainer4 = new Div();
+            textContainer4.getStyle()
+                // .set("border-left", "9px solid orange")
+                .set("padding-left", "8px");  // Add some spacing between border and text
+    
+            Paragraph labsMainText = new Paragraph("Labs");
+            Icon arrow4 = new Icon(VaadinIcon.ARROW_RIGHT);
+            Paragraph labsSubText = new Paragraph("Understand your lab results");
+    
+            // Style the arrow
+            arrow4.getStyle()
+                .set("font-size", "10px")
+                .set("margin-top", "10px");
+    
+            // Style the paragraph
+            labsMainText.getStyle()
+                .set("font-size", "16px")
+                .set("margin-bottom", "0px");
+    
+            labsSubText.getStyle()
+                .set("font-size", "12px")
+                .set("margin-top", "0px");
+    
+            // Add both paragraphs to the text container
+            textContainer4.add(labsMainText, labsSubText);
+            // Configure the HorizontalLayout
+            labsSideItemLayout.setWidthFull();
+            labsSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            labsSideItemLayout.setAlignItems(Alignment.CENTER);
+            labsSideItemLayout.add(textContainer4, arrow4);  // Add textContainer instead of homeParagraph
+            labsDiv.add(labsSideItemLayout);
+
+        // Single click listener for virtual healthcare section
+        Component[] labsComponents = {labsDiv, labsSideItemLayout, textContainer4, 
+            labsMainText, labsSubText, arrow4};
+
+        for (Component component : labsComponents) {
+            component.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("labs");
+            updateActiveMenuItem("labs");
+        }).addEventData("event.stopPropagation()");
+        }
+
+
+        Div healthNavigatorDiv = new Div("Health Navigator");
+        Div benefitsDiv = new Div("Benefits");
+        Div cardsDiv = new Div("Cards");
+        cardsDiv.getStyle().set("border-bottom","1px solid #333333");
+
+
+
         // Create virtual healthcare section
         // ... (rest of the virtual healthcare section creation remains the same)
         
         // Map the menu items BEFORE setting initial active state
-        pageMapper(homeHeader, virtualHomeHeader);
+        pageMapper(homeSideItemLayout, virtualHealthcareSideItemLayout, 
+        behavioralSideItemLayout, labsSideItemLayout);
 
         // Set initial active state for home and add navigation listener
         UI.getCurrent().access(() -> {
@@ -184,21 +286,15 @@ public class SideNav {
         });
 
         
-        Div behavioralHealthcare = new Div("Behavioral Healthcare");
-        Div labs = new Div("Labs");
-        Div healthNavigator = new Div("Health Navigator");
-        Div benefits = new Div("Benefits");
-        Div cards = new Div("Cards");
-        cards.getStyle().set("border-bottom","1px solid #333333");
 
         List<Div> divs = new ArrayList<>();
-        divs.add(home);
-        divs.add(virtualHome);
-        divs.add(behavioralHealthcare);
-        divs.add(labs);
-        divs.add(healthNavigator);
-        divs.add(benefits);
-        divs.add(cards);
+        divs.add(homeDiv);
+        divs.add(virtualHealthcareDiv);
+        divs.add(behavioralHealthcareDiv);
+        divs.add(labsDiv);
+        divs.add(healthNavigatorDiv);
+        divs.add(benefitsDiv);
+        divs.add(cardsDiv);
 
         for(Div div : divs) {
             div.addClassName("side-menu-items");
