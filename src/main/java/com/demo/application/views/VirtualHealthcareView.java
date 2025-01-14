@@ -9,7 +9,6 @@ import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -18,47 +17,102 @@ import com.vaadin.flow.router.Route;
 @Route(value="virtual-healthcare", layout=MainLayout.class)
 @PageTitle("Virtual Healthcare")
 class VirtualHealthcareView extends VerticalLayout {
-
-    VirtualHealthcareView() {
+    public VirtualHealthcareView() {
         
         // Remove padding and spacing
         setPadding(false);
         setSpacing(false);
         setSizeFull(); // Make the view take full height
         
+        // Create a container for the entire view
+        VerticalLayout mainContainer = new VerticalLayout();
+        mainContainer.setPadding(false);
+        mainContainer.setSpacing(false);
+        mainContainer.setSizeFull();
+        
+        // Add the header
+        // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
         DynamicHeader header = new DynamicHeader("Need a doctor?", "Talk to one online!");
         
-        // Create content wrapper for scrollable content
+        // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
-        contentWrapper.setSizeFull();
+        contentWrapper.setHeightFull();
+        contentWrapper.setWidthFull();
         contentWrapper.setSpacing(false);
         contentWrapper.setPadding(false);
-
+        contentWrapper.getStyle()
+            .set("flex", "1")
+            .set("min-height", "0"); // Important for enabling scroll
         
-        // Add left and right content
-        contentWrapper.add(SideNav.leftSideContent());
-        contentWrapper.add(rightSideContent());
+        // Add left and right content with independent scrolling
+        Component leftContent = createLeftContent();
+        Component rightContent = createRightContent();
         
-        add(header, contentWrapper);
-        // H1 testText = new H1("Virtual Healthcare");
+        contentWrapper.add(leftContent, rightContent);
+        
+        mainContainer.add(header, contentWrapper);
+        add(mainContainer);
     }
 
-    private Component rightSideContent() {
-        var rightContainer = new Div("something on the right");
-        rightContainer.addClassName("right-container");
-        rightContainer.getStyle()
+    private Component createLeftContent() {
+        Div leftWrapper = new Div();
+        leftWrapper.getStyle()
+            .set("width", "30%")
+            .set("height", "100%")
+            .set("overflow", "hidden") // Hide wrapper overflow
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("margin", "0")
+            .set("padding-right", "16px"); // Add padding to the right side
+
+
+        // Get the original left side content
+        Component originalContent = SideNav.leftSideContent();
+        
+        // Create a scrollable container for the navigation items
+        Div scrollContainer = new Div();
+        scrollContainer.getStyle()
+            .set("overflow-y", "auto")
+            .set("height", "100%")
+            .set("flex", "1")
+            .set("min-height", "0") // Important for enabling scroll
+            .set("width", "100%")
+            .set("display", "flex")
+            .set("justify-content", "flex-end"); // Align content to the right
+        
+        
+        scrollContainer.add(originalContent);
+        leftWrapper.add(scrollContainer);
+        
+        return leftWrapper;
+    }
+
+    private Component createRightContent() {
+        // Create a wrapper for the right content
+        Div rightWrapper = new Div();
+        rightWrapper.getStyle()
             .set("width", "70%")
             .set("height", "100%")
+            .set("overflow", "hidden") // Hide wrapper overflow
+            .set("display", "flex")
+            .set("flex-direction", "column");
+
+        // Create the scrollable container
+        Div scrollContainer = new Div();
+        scrollContainer.getStyle()
+            .set("overflow-y", "auto")
+            .set("height", "100%")
+            .set("flex", "1")
+            .set("min-height", "0") // Important for enabling scroll
             .set("background", "#FFFFFF")
-            .set("overflow-y", "auto") // Enable vertical scrolling
             .set("padding", "var(--lumo-space-m)");
 
-        // Add some test content to demonstrate scrolling
-        // for (int i = 0; i < 20; i++) {
-            rightContainer.add(new Div("this is Virtual Healthcare tab"));
-        // }
+        // Add test content
+        for (int i = 0; i < 20; i++) {
+            scrollContainer.add(new Div("Scroll content " + i));
+        }
 
-        return rightContainer;
+        rightWrapper.add(scrollContainer);
+        return rightWrapper;
     }
-
 }

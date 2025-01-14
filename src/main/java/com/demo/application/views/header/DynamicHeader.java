@@ -19,7 +19,7 @@ public class DynamicHeader extends Div {
         getStyle()
             .set("padding", "0px")
             .set("width", "100%")
-            .set("height", "30vh")
+            .set("height", "10%")
             .set("min-height", "200px")
             .set("background-color", "#e7f5e9")
             .set("position", "sticky")  // Make header sticky

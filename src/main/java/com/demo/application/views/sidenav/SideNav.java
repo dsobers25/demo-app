@@ -23,11 +23,15 @@ public class SideNav {
     }
 
     private static void pageMapper(HorizontalLayout homeSideItemLayout, HorizontalLayout virtualHealthcareSideItemLayout,
-    HorizontalLayout behavioralSideItemLayout, HorizontalLayout labsSideItemLayout) {
+    HorizontalLayout behavioralSideItemLayout, HorizontalLayout labsSideItemLayout,
+    HorizontalLayout healthNavigatorSideItemLayout, HorizontalLayout benefitsSideItemLayout) {
             menuItems.put("", homeSideItemLayout); // homepage
             menuItems.put("virtual-healthcare", virtualHealthcareSideItemLayout);
             menuItems.put("behavioral-healthcare", behavioralSideItemLayout);
             menuItems.put("labs", labsSideItemLayout);
+            menuItems.put("health-navigator", healthNavigatorSideItemLayout);
+            menuItems.put("benefits", benefitsSideItemLayout);
+            //
         }
 
         private static void updateActiveMenuItem(String location) {
@@ -47,14 +51,18 @@ public class SideNav {
             var leftContainer = new Div();
             leftContainer.addClassName("left-container");
             leftContainer.getStyle()
-                .set("width", "30%")
+                .set("width", "100%")
                 .set("height", "100%")
                 .set("background", "#F7F8F9")
-                .set("overflow-y", "auto") // Enable vertical scrolling
+                .set("display", "flex")
+                .set("flex-direction", "column")
                 .set("padding", "var(--lumo-space-m)")
-                .set("display", "flex")         // Make it a flex container
-                .set("flex-direction", "column") // Stack items vertically
-                .set("align-items", "flex-end"); // Align items to the right
+                .set("padding-left", "0") // Remove left padding
+                .set("padding-right", "10%") // Remove right padding
+                .set("box-sizing", "border-box")
+                .set("overflow-y", "auto") // Change to auto instead of always showing
+                .set("align-items", "flex-end"); // Align items to the right side
+
     
             // Add some test content to demonstrate scrolling
             // for (int i = 0; i < 20; i++) {
@@ -257,19 +265,111 @@ public class SideNav {
         }
 
 
-        Div healthNavigatorDiv = new Div("Health Navigator");
-        Div benefitsDiv = new Div("Benefits");
+        Div healthNavigatorDiv = new Div();
+
+        HorizontalLayout healthNavigatorSideItemLayout = new HorizontalLayout();
+            // Create a container div for the text content with orange left border
+            Div textContainer5 = new Div();
+            textContainer5.getStyle()
+                // .set("border-left", "9px solid orange")
+                .set("padding-left", "8px");  // Add some spacing between border and text
+    
+            Paragraph healthNavigatorMainText = new Paragraph("Health Navigator");
+            Icon arrow5 = new Icon(VaadinIcon.ARROW_RIGHT);
+            Paragraph healthNavigatorSubText = new Paragraph("Support when navigating healthcare");
+    
+            // Style the arrow
+            arrow5.getStyle()
+                .set("font-size", "10px")
+                .set("margin-top", "10px");
+    
+            // Style the paragraph
+            healthNavigatorMainText.getStyle()
+                .set("font-size", "16px")
+                .set("margin-bottom", "0px");
+    
+            healthNavigatorSubText.getStyle()
+                .set("font-size", "12px")
+                .set("margin-top", "0px");
+    
+            // Add both paragraphs to the text container
+            textContainer5.add(healthNavigatorMainText, healthNavigatorSubText);
+            // Configure the HorizontalLayout
+            healthNavigatorSideItemLayout.setWidthFull();
+            healthNavigatorSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            healthNavigatorSideItemLayout.setAlignItems(Alignment.CENTER);
+            healthNavigatorSideItemLayout.add(textContainer5, arrow5);  // Add textContainer instead of homeParagraph
+            healthNavigatorDiv.add(healthNavigatorSideItemLayout);
+
+        // Single click listener for virtual healthcare section
+        Component[] healthNavigatorComponents = {healthNavigatorDiv, healthNavigatorSideItemLayout, textContainer5, 
+            healthNavigatorMainText, healthNavigatorSubText, arrow5};
+
+        for (Component component : healthNavigatorComponents) {
+            component.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("health-navigator");
+            updateActiveMenuItem("health-navigator");
+        }).addEventData("event.stopPropagation()");
+        }
+
+        Div benefitsDiv = new Div();
+
+        HorizontalLayout benefitsSideItemLayout = new HorizontalLayout();
+            // Create a container div for the text content with orange left border
+            Div textContainer6 = new Div();
+            textContainer6.getStyle()
+                // .set("border-left", "9px solid orange")
+                .set("padding-left", "8px");  // Add some spacing between border and text
+    
+            Paragraph benefitsMainText = new Paragraph("Benefits");
+            Icon arrow6 = new Icon(VaadinIcon.ARROW_RIGHT);
+            Paragraph benefitsSubText = new Paragraph("Understand your benefits");
+    
+            // Style the arrow
+            arrow6.getStyle()
+                .set("font-size", "10px")
+                .set("margin-top", "10px");
+    
+            // Style the paragraph
+            benefitsMainText.getStyle()
+                .set("font-size", "16px")
+                .set("margin-bottom", "0px");
+    
+            benefitsSubText.getStyle()
+                .set("font-size", "12px")
+                .set("margin-top", "0px");
+    
+            // Add both paragraphs to the text container
+            textContainer6.add(benefitsMainText, benefitsSubText);
+            // Configure the HorizontalLayout
+            benefitsSideItemLayout.setWidthFull();
+            benefitsSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            benefitsSideItemLayout.setAlignItems(Alignment.CENTER);
+            benefitsSideItemLayout.add(textContainer6, arrow6);  // Add textContainer instead of homeParagraph
+            benefitsDiv.add(benefitsSideItemLayout);
+
+        // Single click listener for virtual healthcare section
+        Component[] benefitsNavigatorComponents = {benefitsDiv, healthNavigatorSideItemLayout, textContainer5, 
+            benefitsMainText, benefitsSubText, arrow6};
+
+        for (Component component : benefitsNavigatorComponents) {
+            component.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("benefits");
+            updateActiveMenuItem("benefits");
+        }).addEventData("event.stopPropagation()");
+        }
+
+
         Div cardsDiv = new Div("Cards");
         cardsDiv.getStyle().set("border-bottom","1px solid #333333");
-
-
 
         // Create virtual healthcare section
         // ... (rest of the virtual healthcare section creation remains the same)
         
         // Map the menu items BEFORE setting initial active state
         pageMapper(homeSideItemLayout, virtualHealthcareSideItemLayout, 
-        behavioralSideItemLayout, labsSideItemLayout);
+        behavioralSideItemLayout, labsSideItemLayout, healthNavigatorSideItemLayout,
+        benefitsSideItemLayout);
 
         // Set initial active state for home and add navigation listener
         UI.getCurrent().access(() -> {
@@ -296,11 +396,14 @@ public class SideNav {
         divs.add(benefitsDiv);
         divs.add(cardsDiv);
 
+        // Update the div styling in the loop
         for(Div div : divs) {
             div.addClassName("side-menu-items");
-            div.getStyle().set("width", "255px") // Set width for the menu items
-                        .set("margin", "0 0 0 32px")
-                        .set("cursor", "pointer");
+            div.getStyle()
+                .set("width", "255px") // Fixed width instead of percentage
+                .set("margin-bottom", "16px")
+                .set("margin-right", "0") // Align to the right
+                .set("cursor", "pointer");
             leftContainer.add(div);
         }
 
