@@ -37,6 +37,21 @@
     }
 }
 
+.side-menu-items {
+    border-top: 1px solid #333333;    /* Dark grey top border */
+    right: 0;
+    width: 162px;
+    cursor: pointer;
+}
+
+.side-menu-items > * {
+    pointer-events: none;
+}
+
+.active-side-menu-item {
+    border-left: 9px solid orange;
+}
+
 .right-container {
     display: flex;
     flex-direction: column;
