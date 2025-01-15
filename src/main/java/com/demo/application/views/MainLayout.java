@@ -107,6 +107,52 @@ public class MainLayout extends AppLayout {
             .set("transition", "bottom 0.3s ease-in-out")
             .set("box-shadow", "0 -2px 5px rgba(0, 0, 0, 0.2)"); // Changed shadow direction
 
+        // Create a container for the text elements
+    Div textContainer = new Div();
+    textContainer.getStyle()
+        .set("display", "flex")
+        .set("flex-direction", "column")
+        // .set("padding", "24px")
+        .set("justify-content", "center")  // Vertical centering
+        .set("align-items", "center")      // Horizontal centering
+        .set("height", "100%")             // Full height of parent
+        .set("gap", "4px");                // Space between text elements
+
+        Paragraph topLevelText = new Paragraph("Talk to a Health Navigator Advisor");
+        Paragraph midLevelText = new Paragraph("Call 888-352-4969");
+        Paragraph bottomLevelText = new Paragraph("Monday - Friday, 8:00 - 6:00pm (ET)");
+
+        // Style the paragraphs
+        topLevelText.getStyle()
+        .set("margin", "0")
+        .set("padding", "0")
+        .set("font-size", "14px")    // Slightly reduced
+        .set("line-height", "1.2")   // Tighter line height
+        .set("font-weight", "500")
+        .set("color", "#78716C");
+
+        midLevelText.getStyle()
+            .set("margin", "0")
+            .set("padding", "0")
+            .set("font-size", "18px")    // Slightly reduced
+            .set("line-height", "1.2")   // Tighter line height
+            .set("font-weight", "600")
+            .set("color", "#78716C");
+
+        bottomLevelText.getStyle()
+            .set("margin", "0")
+            .set("padding", "0")
+            .set("font-size", "12px")    // Slightly reduced
+            .set("line-height", "1.2")   // Tighter line height
+            .set("color", "#78716C");
+
+        // Add paragraphs to the container
+        textContainer.add(topLevelText, midLevelText, bottomLevelText);
+
+        // Add the container to the slide-up menu
+        slideUpMenu.add(textContainer);
+
+
         // Simple click listener for overlay
         overlay2.getElement().addEventListener("click", e -> toggleChat());
 
