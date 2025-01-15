@@ -58,12 +58,6 @@
     height: calc(100vh - 30vh); /* Subtract header height */
 }
 
-@media screen and (max-width: 1023px) {
-    .right-container {
-        width: 100%;
-    }
-}
-
 .left-container {
     display: flex;
     flex-direction: column;
@@ -71,7 +65,43 @@
 }
 
 @media screen and (max-width: 1023px) {
+    .right-container {
+        width: 100%;
+    }
+
     .left-container {
         display: none !important;
     }
+}
+
+.header-height {
+    height: 176px;
+}
+
+.pageGreeting {
+    /* font-size: 3rem; */
+    font-size: 48px;
+    margin-top: 25px;
+}
+
+.subText {
+    /* font-size: 1.5rem; */
+    font-size: 24px;
+}
+
+@media screen and (max-width: 1023px) {
+    .header-height {
+        height: 128px;            
+    }
+
+    .pageGreeting {
+        /* font-size: 1.875rem; */
+        font-size: 30px;
+    }
+    
+    .subText {
+        /* font-size: 1rem; */
+        font-size: 16px;
+    }
+
 }
