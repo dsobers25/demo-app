@@ -1,5 +1,7 @@
 package com.demo.application.views;
 
+import com.demo.application.views.sidenav.SideNav;
+import com.demo.application.views.sidenav.SideNav2;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -9,15 +11,11 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Layout;
-import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.theme.lumo.LumoUtility.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +67,112 @@ public class MainLayout extends AppLayout {
             .set("transition", "right 0.3s ease-in-out")
             .set("box-shadow", "-2px 0 5px rgba(0, 0, 0, 0.2)");
 
+        // Create slide-out menu content container
+        Div sideMenuContent = new Div();
+        sideMenuContent.getStyle()
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("padding", "24px")
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("align-items", "center")
+            .set("box-sizing", "border-box");    // This ensures padding is included in width
+
+        // Phone number styling
+        Div number = new Div("+1 123 123-1234");
+        number.getStyle()
+            .set("font-size", "12px")
+            .set("width", "100%")           // Take full width
+            .set("text-align", "center");    // Center the text
+            // .set("margin-bottom", "24px");  // Add space below number
+
+        // Circle/User section
+        // Also ensure your circle maintains its shape by making height equal to width
+        Div circle = new Div();
+        circle.addClassName("nav-middle-items");
+        circle.getStyle()
+            .set("width", "96px")
+            .set("height", "96px")    // Same as width to maintain circle shape
+            .set("min-width", "96px") // Prevent flex shrinking
+            .set("min-height", "96px") // Prevent flex shrinking
+            .set("background-color", "#04536F")
+            .set("border-radius", "50%")
+            .set("display", "flex")
+            .set("justify-content", "center")
+            .set("align-items", "center")
+            .set("cursor", "pointer")
+            .set("margin-top", "16px")
+            .set("flex-shrink", "0");  // Prevent flex shrinking
+
+        Paragraph user = new Paragraph("J");
+        user.getStyle()
+            .set("color", "white")
+            .set("font-size", "48px")
+            .set("font-weight", "bold")
+            .set("margin", "0")
+            .set("line-height", "1");     // Prevent extra spacing
+
+        sideMenuContent.add(number);
+        circle.add(user);
+        sideMenuContent.add(circle);
+        Paragraph userGreeting = new Paragraph("Welcome John!");
+        userGreeting.getStyle().set("font-size", "24px")
+                                .set("margin-top", "12px");
+
+        sideMenuContent.add(userGreeting);
+
+        Div topButton = new Div("View your profile");
+        topButton.getStyle()
+            .set("font-weight", "700")
+            .set("display", "flex")          // Add flex display
+            .set("justify-content", "center") // Center content horizontally
+            .set("align-items", "center")     // Center content vertically
+            .set("font-size", "14px")
+            .set("border-radius", "19px")
+            .set("border", "2px solid #e5e7eb")
+            .set("padding", "8px 0px")
+            .set("width", "335px")
+            .set("height", "20px")
+            .set("cursor", "pointer")
+            .set("color", "#78716C");
+
+        Div bottomButton = new Div("Benefits & Dependents");
+        bottomButton.getStyle().set("font-weight", "700")
+                .set("display", "flex")          // Add flex display
+                .set("justify-content", "center") // Center content horizontally
+                .set("align-items", "center")     // Center content vertically
+                .set("font-size", "14px")
+                .set("border-radius", "19px")
+                .set("border", "2px solid #e5e7eb")
+                .set("padding", "8px 0px")
+                .set("width", "335px")
+                .set("height", "20px")
+                .set("cursor", "pointer")
+                .set("margin-top", "12px")
+                .set("color", "#78716C");
+                
+        sideMenuContent.add(topButton);
+        sideMenuContent.add(bottomButton);
+
+        var rightSideNav = SideNav2.leftSideContent();
+        rightSideNav.getStyle()
+            .set("padding", "0")     // Remove the padding
+            .set("margin-top", "24px")  // Add some space from elements above
+            .set("width", "100%");    // Ensure full width
+
+        rightSideNav.getElement().getChild(0).addEventListener("click", e -> closeMenu());
+        rightSideNav.getElement().getChild(1).addEventListener("click", e -> closeMenu());
+        rightSideNav.getElement().getChild(2).addEventListener("click", e -> closeMenu());
+        rightSideNav.getElement().getChild(3).addEventListener("click", e -> closeMenu());
+        rightSideNav.getElement().getChild(4).addEventListener("click", e -> closeMenu());
+        rightSideNav.getElement().getChild(5).addEventListener("click", e -> closeMenu());
+        rightSideNav.getElement().getChild(6).addEventListener("click", e -> closeMenu());
+        // rightSideNav.getElement().getChild(7).addEventListener("click", e -> closeMenu());
+        // System.out.println(rightSideNav.getElement().getChild(6));
+        sideMenuContent.add(rightSideNav);
+
+        slideOutMenu.add(sideMenuContent);
+
         // Simple click listener for overlay
         overlay.getElement().addEventListener("click", e -> toggleMenu());
 
@@ -108,15 +212,15 @@ public class MainLayout extends AppLayout {
             .set("box-shadow", "0 -2px 5px rgba(0, 0, 0, 0.2)"); // Changed shadow direction
 
         // Create a container for the text elements
-    Div textContainer = new Div();
-    textContainer.getStyle()
-        .set("display", "flex")
-        .set("flex-direction", "column")
-        // .set("padding", "24px")
-        .set("justify-content", "center")  // Vertical centering
-        .set("align-items", "center")      // Horizontal centering
-        .set("height", "100%")             // Full height of parent
-        .set("gap", "4px");                // Space between text elements
+        Div textContainer = new Div();
+        textContainer.getStyle()
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            // .set("padding", "24px")
+            .set("justify-content", "center")  // Vertical centering
+            .set("align-items", "center")      // Horizontal centering
+            .set("height", "100%")             // Full height of parent
+            .set("gap", "4px");                // Space between text elements
 
         Paragraph topLevelText = new Paragraph("Talk to a Health Navigator Advisor");
         Paragraph midLevelText = new Paragraph("Call 888-352-4969");
