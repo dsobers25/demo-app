@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package com.demo.application.views;
+package com.demo.application.views.benefits;
 
+import com.demo.application.views.MainLayout;
 import com.demo.application.views.header.DynamicHeader;
-import com.demo.application.views.sidenav.BenefitsSideNav;
+import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -14,15 +15,14 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value="benefits", layout=MainLayout.class)
-@PageTitle("Benefits")
-class BenefitsView extends VerticalLayout {
-    public BenefitsView() {
+@Route(value="behavioral-healthcare", layout=MainLayout.class)
+@PageTitle("Behavioral Healthcare")
+class BehavioralHealthcareView extends VerticalLayout {
+    public BehavioralHealthcareView() {
         // Remove padding and spacing
         setPadding(false);
         setSpacing(false);
         setSizeFull(); // Make the view take full height
-        
         
         // Create a container for the entire view
         VerticalLayout mainContainer = new VerticalLayout();
@@ -31,8 +31,8 @@ class BenefitsView extends VerticalLayout {
         mainContainer.setSizeFull();
         
         // Add the header
-        DynamicHeader header = new DynamicHeader("You've got benefits", "Let's us explain them!");
         // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
+        DynamicHeader header = new DynamicHeader("Need a counselor?", "Talk to one online!");
         
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
@@ -67,7 +67,7 @@ class BenefitsView extends VerticalLayout {
 
 
         // Get the original left side content
-        Component originalContent = BenefitsSideNav.leftSideContent();
+        Component originalContent = SideNav.leftSideContent();
         
         // Create a scrollable container for the navigation items
         Div scrollContainer = new Div();

@@ -350,6 +350,16 @@ public class MainLayout extends AppLayout {
             item.getStyle().set("border-bottom", "2px solid transparent");
         });
         
+        // If location contains "benefits", activate the benefits nav item
+        if (location.contains("benefits")) {
+            location = "benefits"; // Reset location to match the main benefits key
+        }
+
+        // If location contains "cards", activate the cards nav item
+        if (location.contains("cards")) {
+            location = "cards"; // Reset location to match the main cards key
+        }
+        
         if (navItems.containsKey(location)) {
             Div activeItem = navItems.get(location);
             activeItem.getStyle()

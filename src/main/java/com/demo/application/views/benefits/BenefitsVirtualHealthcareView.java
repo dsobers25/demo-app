@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package com.demo.application.views;
+package com.demo.application.views.benefits;
 
+import com.demo.application.views.MainLayout;
 import com.demo.application.views.header.DynamicHeader;
+import com.demo.application.views.sidenav.BenefitsSideNav;
 import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
@@ -14,10 +16,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value="behavioral-healthcare", layout=MainLayout.class)
-@PageTitle("Behavioral Healthcare")
-class BehavioralHealthcareView extends VerticalLayout {
-    public BehavioralHealthcareView() {
+@Route(value="benefits/virtual-healthcare", layout=MainLayout.class)
+@PageTitle("Benefits Virtual Healthcare")
+class BenefitsVirtualHealthcareView extends VerticalLayout {
+    public BenefitsVirtualHealthcareView() {
+        
         // Remove padding and spacing
         setPadding(false);
         setSpacing(false);
@@ -31,7 +34,7 @@ class BehavioralHealthcareView extends VerticalLayout {
         
         // Add the header
         // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        DynamicHeader header = new DynamicHeader("Need a counselor?", "Talk to one online!");
+        DynamicHeader header = new DynamicHeader("You've got benefits!", "Let us explain them!");
         
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
@@ -66,7 +69,7 @@ class BehavioralHealthcareView extends VerticalLayout {
 
 
         // Get the original left side content
-        Component originalContent = SideNav.leftSideContent();
+        Component originalContent = BenefitsSideNav.leftSideContent();
         
         // Create a scrollable container for the navigation items
         Div scrollContainer = new Div();
