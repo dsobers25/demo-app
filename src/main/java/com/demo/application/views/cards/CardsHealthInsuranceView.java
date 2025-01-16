@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+package com.demo.application.views.cards;
 
-package com.demo.application.views.benefits;
 
 import com.demo.application.views.MainLayout;
 import com.demo.application.views.header.DynamicHeader;
-import com.demo.application.views.sidenav.BenefitsSideNav;
+import com.demo.application.views.sidenav.CardsSideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -15,10 +11,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value="benefits/dental", layout=MainLayout.class)
-@PageTitle("Benefits Dental")
-public class BenefitsDentalView extends VerticalLayout {
-    public BenefitsDentalView() {
+
+@Route(value="cards/health-insurance", layout=MainLayout.class)
+@PageTitle("Cards Health Insurance")
+public class CardsHealthInsuranceView  extends VerticalLayout {
+    public CardsHealthInsuranceView() {
         
         // Remove padding and spacing
         setPadding(false);
@@ -33,7 +30,7 @@ public class BenefitsDentalView extends VerticalLayout {
         
         // Add the header
         // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        DynamicHeader header = new DynamicHeader("You've got benefits!", "Let us explain them!");
+        DynamicHeader header = new DynamicHeader("You've got cards!", "Let us explain them!");
         
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
@@ -68,7 +65,7 @@ public class BenefitsDentalView extends VerticalLayout {
 
 
         // Get the original left side content
-        Component originalContent = BenefitsSideNav.leftSideContent();
+        Component originalContent = CardsSideNav.leftSideContent();
         
         // Create a scrollable container for the navigation items
         Div scrollContainer = new Div();

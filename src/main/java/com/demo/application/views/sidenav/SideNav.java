@@ -24,13 +24,15 @@ public class SideNav {
 
     private static void pageMapper(HorizontalLayout homeSideItemLayout, HorizontalLayout virtualHealthcareSideItemLayout,
     HorizontalLayout behavioralSideItemLayout, HorizontalLayout labsSideItemLayout,
-    HorizontalLayout healthNavigatorSideItemLayout, HorizontalLayout benefitsSideItemLayout) {
+    HorizontalLayout healthNavigatorSideItemLayout, HorizontalLayout benefitsSideItemLayout,
+    HorizontalLayout cardsSideItemLayout) {
             menuItems.put("", homeSideItemLayout); // homepage
             menuItems.put("virtual-healthcare", virtualHealthcareSideItemLayout);
             menuItems.put("behavioral-healthcare", behavioralSideItemLayout);
             menuItems.put("labs", labsSideItemLayout);
             menuItems.put("health-navigator", healthNavigatorSideItemLayout);
             menuItems.put("benefits", benefitsSideItemLayout);
+            menuItems.put("cards", cardsSideItemLayout);
             //
         }
 
@@ -360,16 +362,60 @@ public class SideNav {
         }
 
 
-        Div cardsDiv = new Div("Cards");
+        Div cardsDiv = new Div();
         cardsDiv.getStyle().set("border-bottom","1px solid #333333");
 
+        HorizontalLayout cardsSideItemLayout = new HorizontalLayout();
+            // Create a container div for the text content with orange left border
+            Div textContainer7 = new Div();
+            textContainer7.getStyle()
+                // .set("border-left", "9px solid orange")
+                .set("padding-left", "8px");  // Add some spacing between border and text
+    
+            Paragraph cardsMainText = new Paragraph("Cards");
+            Icon arrow7 = new Icon(VaadinIcon.ARROW_RIGHT);
+            Paragraph cardsSubText = new Paragraph("Understand your membership cards");
+    
+            // Style the arrow
+            arrow7.getStyle()
+                .set("font-size", "10px")
+                .set("margin-top", "10px");
+    
+            // Style the paragraph
+            cardsMainText.getStyle()
+                .set("font-size", "16px")
+                .set("margin-bottom", "0px");
+    
+            cardsSubText.getStyle()
+                .set("font-size", "12px")
+                .set("margin-top", "0px");
+    
+            // Add both paragraphs to the text container
+            textContainer7.add(cardsMainText, cardsSubText);
+            // Configure the HorizontalLayout
+            cardsSideItemLayout.setWidthFull();
+            cardsSideItemLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+            cardsSideItemLayout.setAlignItems(Alignment.CENTER);
+            cardsSideItemLayout.add(textContainer7, arrow7);  // Add textContainer instead of homeParagraph
+            cardsDiv.add(cardsSideItemLayout);
+
+        // Single click listener for virtual healthcare section
+        Component[] cardsNavComponents = {cardsDiv, cardsSideItemLayout, textContainer7, 
+            cardsMainText, cardsSubText, arrow7};
+
+        for (Component component : cardsNavComponents) {
+            component.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("cards");
+            updateActiveMenuItem("cards");
+        }).addEventData("event.stopPropagation()");
+    }
         // Create virtual healthcare section
         // ... (rest of the virtual healthcare section creation remains the same)
         
         // Map the menu items BEFORE setting initial active state
         pageMapper(homeSideItemLayout, virtualHealthcareSideItemLayout, 
         behavioralSideItemLayout, labsSideItemLayout, healthNavigatorSideItemLayout,
-        benefitsSideItemLayout);
+        benefitsSideItemLayout, cardsSideItemLayout);
 
         // Set initial active state for home and add navigation listener
         UI.getCurrent().access(() -> {
