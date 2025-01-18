@@ -33,7 +33,6 @@ public class SideNav {
             menuItems.put("health-navigator", healthNavigatorSideItemLayout);
             menuItems.put("benefits", benefitsSideItemLayout);
             menuItems.put("cards", cardsSideItemLayout);
-            //
         }
 
         private static void updateActiveMenuItem(String location) {

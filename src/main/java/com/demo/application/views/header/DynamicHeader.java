@@ -17,29 +17,34 @@ public class DynamicHeader extends Div {
 
     private void configureHeader() {
         getStyle()
-            .set("padding", "0px")
-            .set("width", "100%")
-            // .set("height", "176px")
-            // .set("min-height", "128px")
-            .set("background-color", "#e7f5e9")
-            .set("position", "sticky")  // Make header sticky
-            .set("top", "0")
-            .set("z-index", "100");     // Ensure header stays on top
+        .set("padding", "24px")  // Add vertical padding
+        .set("width", "100%")
+        .set("min-height", "128px")
+        .set("box-sizing", "border-box")
+        .set("background-color", "#e7f5e9")
+        .set("position", "sticky")
+        .set("top", "0")
+        .set("z-index", "100")
+        .set("display", "flex")  // Add flex display
+        .set("flex-direction", "column")  // Stack children vertically
+        .set("justify-content", "center");  // Center content vertically
 
         addClassName("header-height");
 
         H1 greeting = new H1(pageGreeting);
-        greeting.getStyle()
-            .set("text-align", "center")
-            // .set("margin-top", "70px")
-            .set("margin-bottom", "0");
+            greeting.getStyle()
+                .set("text-align", "center")
+                .set("margin", "0")  // Remove default margins
+                .set("padding", "8px 0");  // Add some vertical padding
+
+        Paragraph subTextParagraph = new Paragraph(subText);
+            subTextParagraph.getStyle()
+                .set("text-align", "center")
+                .set("margin", "0")  // Remove default margins
+                .set("padding", "8px 0");  // Add some vertical padding
 
         greeting.addClassName("pageGreeting");
 
-        Paragraph subTextParagraph = new Paragraph(subText);
-        subTextParagraph.getStyle()
-            .set("text-align", "center");
-            // .set("margin-top", "1rem");
 
         subTextParagraph.addClassName("subText");
 
