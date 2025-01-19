@@ -77,7 +77,15 @@
     min-width: 390.94px;
 }
 
+.dropdown-container { /* not working as expected 1/19/2025 */
+    max-width: 595.86px;
+}
+
 @media screen and (max-width: 1023px) {
+
+    .dropdown-container {
+        max-width: 100%;
+    }
 
     .top-item {
         max-width: 100%;
