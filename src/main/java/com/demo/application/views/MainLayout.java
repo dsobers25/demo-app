@@ -132,8 +132,10 @@ public class MainLayout extends AppLayout {
             .set("cursor", "pointer")
             .set("color", "#78716C");
         
-        topButton.getElement().addEventListener("click", e -> closeMenu());
-        
+        topButton.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("profile");
+            closeMenu();
+        });
 
 
         Div bottomButton = new Div("Benefits & Dependents");
@@ -151,8 +153,10 @@ public class MainLayout extends AppLayout {
                 .set("margin-top", "12px")
                 .set("color", "#78716C");
 
-        bottomButton.getElement().addEventListener("click", e -> closeMenu());
-
+        bottomButton.getElement().addEventListener("click", e -> {
+            UI.getCurrent().navigate("enrollment");
+            closeMenu();
+        });
                 
         sideMenuContent.add(topButton);
         sideMenuContent.add(bottomButton);
