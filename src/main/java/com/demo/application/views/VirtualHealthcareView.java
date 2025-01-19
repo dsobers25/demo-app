@@ -11,6 +11,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -18,6 +20,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+// need to make dropdowns close when another drop down is opened
 
 @Route(value="virtual-healthcare", layout=MainLayout.class)
 @PageTitle("Virtual Healthcare")
@@ -151,6 +155,8 @@ class VirtualHealthcareView extends VerticalLayout {
         dropdownContainer.addClassName("dropdown-container");
     
         dropdownContainer.add(dropdownHeader, contentDiv);
+
+        
     
         // Add click listener to toggle content
         dropdownHeader.addClickListener(e -> {
@@ -184,6 +190,10 @@ class VirtualHealthcareView extends VerticalLayout {
             .set("min-height", "0")
             .set("background", "#FFFFFF")
             .set("padding", "var(--lumo-space-m)");
+        
+        H4 mainText = new H4("Virtual Primary Care & Virtual Urgent Care");
+        Paragraph subText = new Paragraph("powered by Recuro Health");
+        scrollContainer.add(mainText, subText);
     
         // Add all dropdowns
         scrollContainer.add(
@@ -216,8 +226,26 @@ class VirtualHealthcareView extends VerticalLayout {
                 "Get referrals to specialists when needed for your care."
             )
         );
-    
+        
+        Div openRecuroHealthButton = new Div("Open Recuro Health");
+            openRecuroHealthButton.getStyle()
+                .set("max-width", "595.86px")
+                .set("height", "40px")
+                .set("background-color", "green")
+                .set("color", "#FFFFFF")
+                .set("padding", "3px")
+                .set("box-sizing", "border-box")
+                
+                .set("border-radius", "5px")
+                .set("display", "flex")  // Add this
+                .set("justify-content", "center")
+                .set("align-items", "center")  // Fix typo
+                .set("margin-bottom", "33px")     // Add some space above button
+                .set("cursor", "pointer");      // Add pointer cursor
+
+        
         rightWrapper.add(scrollContainer);
+        rightWrapper.add(openRecuroHealthButton);
         return rightWrapper;
     }
 }

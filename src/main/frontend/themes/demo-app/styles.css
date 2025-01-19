@@ -72,6 +72,10 @@
     width: 30%;
 }
 
+.right-wrapper {
+    width: 70%;
+}
+
 .top-item {
     max-width: 595.86px;
     min-width: 390.94px;
@@ -81,7 +85,27 @@
     max-width: 595.86px;
 }
 
+.contact-and-time {
+    max-width: 60vw;
+}
+
+.license-counselor {
+    max-width: 595.86px;
+}
+
 @media screen and (max-width: 1023px) {
+
+    .license-counselor {
+        max-width: 100%;
+    }
+
+    .right-wrapper {
+        width: 100%;
+    }
+
+    .contact-and-time {
+        width: 100vw;
+    }
 
     .dropdown-container {
         max-width: 100%;

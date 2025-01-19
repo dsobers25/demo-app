@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package com.demo.application.views.benefits;
+package com.demo.application.views;
 
-import com.demo.application.views.MainLayout;
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.ListItem;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -56,8 +60,9 @@ class BehavioralHealthcareView extends VerticalLayout {
 
     private Component createLeftContent() {
         Div leftWrapper = new Div();
+        leftWrapper.addClassName("left-wrapper");
         leftWrapper.getStyle()
-            .set("width", "30%")
+            // .set("width", "30%")
             .set("height", "100%")
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
@@ -90,8 +95,9 @@ class BehavioralHealthcareView extends VerticalLayout {
     private Component createRightContent() {
         // Create a wrapper for the right content
         Div rightWrapper = new Div();
+        rightWrapper.addClassName("right-wrapper");
         rightWrapper.getStyle()
-            .set("width", "70%")
+            // .set("width", "70%")
             .set("height", "100%")
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
@@ -107,10 +113,41 @@ class BehavioralHealthcareView extends VerticalLayout {
             .set("background", "#FFFFFF")
             .set("padding", "var(--lumo-space-m)");
 
+        H3 topLine = new H3("Behavioral Healthcare");
+        Paragraph subLine = new Paragraph("powered by CCA");
+            // contactAndTime.add(number, timeAndDay);
+    
+        scrollContainer.add(topLine, subLine);
+
+        Div licensedCouncelorSection = new Div();
+        licensedCouncelorSection.addClassName("license-counselor");
+            licensedCouncelorSection.getStyle()
+                            // .set("max-width", "60%")
+                            .set("background-color", "#e7f5e9")
+                            .set("max-height", "25%")
+                            .set("padding", "16px")
+                            .set("background-color", "#e7f5e9")
+                            .set("border-radius", "16px 16px 16px 16px")
+                            .set("border", "1px solid #E6E5E5");
+
+        H4 number = new H4("Call 123-321-1234");
+        Paragraph tollFree = new Paragraph("for 24/7 toll-free access to licensed counselors");
+        licensedCouncelorSection.add(number, tollFree);
+
+        scrollContainer.add(licensedCouncelorSection);
+
+        Paragraph textContent1 = new Paragraph("CCA supports members — employees and their loved ones — through a range of personal and professional issues including stress, anxiety, work/life balance, parenting, relationships, and grief via evidence-based, short-term counseling. Our counselors utilize a variety of treatment modalities such as solution focused, motivational interviewing, CBT, psychodynamic, and more.");
+        Paragraph textContent2 = new Paragraph("Additionally, our masters-level intake counselors are available 24/7 to provide immediate crisis support to members in distress as well as to conduct comprehensive telephonic assessments. This assessment allows the counselor to determine the most clinically appropriate course of treatment—one that also incorporates any specific needs or preferences a member might have regarding ethnicity, language, location, areas of specialty, insurance participation, and more. Our counselors are adept at curating referrals based on each member's unique profile. After making the referral, we follow up to ensure satisfaction and inquire about any additional resources that could be helpful to the member.");
+
+        textContent1.addClassName("license-counselor");
+        textContent2.addClassName("license-counselor");
+
+        scrollContainer.add(textContent1, textContent2);
+        
         // Add test content
-        for (int i = 0; i < 20; i++) {
-            scrollContainer.add(new Div("Scroll content " + i));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     scrollContainer.add(new Div("Scroll content " + i));
+        // }
 
         rightWrapper.add(scrollContainer);
         return rightWrapper;
