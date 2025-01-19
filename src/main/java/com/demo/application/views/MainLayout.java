@@ -1,11 +1,7 @@
 package com.demo.application.views;
 
-import com.demo.application.views.sidenav.SideNav;
 import com.demo.application.views.sidenav.SideNav2;
-import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.Div;
@@ -89,7 +85,7 @@ public class MainLayout extends AppLayout {
         // Circle/User section
         // Also ensure your circle maintains its shape by making height equal to width
         Div circle = new Div();
-        circle.addClassName("nav-middle-items");
+        // circle.addClassName("nav-middle-items");//<-- BUG01: linee 53
         circle.getStyle()
             .set("width", "96px")
             .set("height", "96px")    // Same as width to maintain circle shape
@@ -135,6 +131,10 @@ public class MainLayout extends AppLayout {
             .set("height", "20px")
             .set("cursor", "pointer")
             .set("color", "#78716C");
+        
+        topButton.getElement().addEventListener("click", e -> closeMenu());
+        
+
 
         Div bottomButton = new Div("Benefits & Dependents");
         bottomButton.getStyle().set("font-weight", "700")
@@ -150,6 +150,9 @@ public class MainLayout extends AppLayout {
                 .set("cursor", "pointer")
                 .set("margin-top", "12px")
                 .set("color", "#78716C");
+
+        bottomButton.getElement().addEventListener("click", e -> closeMenu());
+
                 
         sideMenuContent.add(topButton);
         sideMenuContent.add(bottomButton);
@@ -169,7 +172,27 @@ public class MainLayout extends AppLayout {
         rightSideNav.getElement().getChild(6).addEventListener("click", e -> closeMenu());
         // rightSideNav.getElement().getChild(7).addEventListener("click", e -> closeMenu());
         // System.out.println(rightSideNav.getElement().getChild(6));
+
+        Div logOutButton = new Div("Log Out");
+        logOutButton.getStyle().set("font-weight", "700")
+                .set("display", "flex")          // Add flex display
+                .set("justify-content", "center") // Center content horizontally
+                .set("align-items", "center")     // Center content vertically
+                .set("font-size", "14px")
+                .set("border-radius", "19px")
+                .set("border", "2px solid #000000")
+                .set("padding", "8px 0px")
+                .set("width", "335px")
+                .set("height", "20px")
+                .set("cursor", "pointer")
+                .set("margin-top", "12px")
+                // .set("background-color", "#000000")
+                .set("color", "#000000");
+        
+        logOutButton.getElement().addEventListener("click", e -> closeMenu());
+
         sideMenuContent.add(rightSideNav);
+        sideMenuContent.add(logOutButton);
 
         slideOutMenu.add(sideMenuContent);
 
@@ -452,7 +475,8 @@ public class MainLayout extends AppLayout {
             .set("display", "flex")
             .set("justify-content", "center")
             .set("align-items", "center")
-            .set("cursor", "pointer");
+            .set("cursor", "pointer")
+            .set("flex-shrink", "0");
 
         Paragraph user = new Paragraph("J");
         user.getStyle()

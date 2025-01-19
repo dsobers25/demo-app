@@ -40,6 +40,7 @@ public class DynamicHeader extends Div {
         Paragraph subTextParagraph = new Paragraph(subText);
             subTextParagraph.getStyle()
                 .set("text-align", "center")
+                .set("white-space"," nowrap")
                 .set("margin", "0")  // Remove default margins
                 .set("padding", "8px 0");  // Add some vertical padding
 

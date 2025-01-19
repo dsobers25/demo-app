@@ -50,7 +50,7 @@ public class SideNav2 {
     
         public static Component leftSideContent() {
             var leftContainer = new Div();
-            leftContainer.addClassName("left-container");
+            // leftContainer.addClassName("left-container"); //<-- BUG01: adding ths was making side menu disapear when screen with was less than 1024px
             leftContainer.getStyle()
                 .set("width", "100%")
                 .set("height", "100%")
@@ -79,7 +79,7 @@ public class SideNav2 {
             textContainer.getStyle().set("padding-left", "8px")
                 .set("width", "100%");  // Make text container take full width
     
-            Paragraph homeMainText = new Paragraph("Home");
+            Paragraph homeMainText = new Paragraph("Homie");
             Icon arrow = new Icon(VaadinIcon.ARROW_RIGHT);
             Paragraph homeSubText = new Paragraph("Start here");
     
@@ -169,6 +169,13 @@ public class SideNav2 {
             updateActiveMenuItem("virtual-healthcare");
         }).addEventData("event.stopPropagation()");
         }
+
+        // Update the click listeners for Virtual Healthcare
+        textContainer2.addClickListener(e -> {
+            UI.getCurrent().navigate("virtual-healthcare");
+            String location = UI.getCurrent().getInternals().getActiveViewLocation().getPathWithQueryParameters();
+            updateActiveMenuItem(location);
+        });    
 
         Div behavioralHealthcareDiv = new Div();
 
@@ -350,7 +357,7 @@ public class SideNav2 {
             benefitsDiv.add(benefitsSideItemLayout);
 
         // Single click listener for virtual healthcare section
-        Component[] benefitsNavigatorComponents = {benefitsDiv, healthNavigatorSideItemLayout, textContainer5, 
+        Component[] benefitsNavigatorComponents = {benefitsDiv, benefitsSideItemLayout, textContainer5, 
             benefitsMainText, benefitsSubText, arrow6};
 
         for (Component component : benefitsNavigatorComponents) {
@@ -429,6 +436,7 @@ public class SideNav2 {
         UI.getCurrent().addBeforeEnterListener(event -> {
             String location = event.getLocation().getPath();
             updateActiveMenuItem(location);
+            System.out.println("close the side menue for " + location);
         });
 
         
@@ -444,7 +452,7 @@ public class SideNav2 {
 
         // Update the div styling in the loop
         for(Div div : divs) {
-            div.addClassName("side-menu-items");
+            div.addClassName("side-menu-items"); // when this what commented out the side menu wouldn't close
             div.getStyle()
                 .set("width", "100%") // Fixed width instead of percentage
                 .set("margin-bottom", "16px")

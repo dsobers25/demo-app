@@ -161,6 +161,7 @@ public class HomeView extends VerticalLayout {
             "style.textContent = `" +
             "  .service-grid {" +
             "    grid-template-columns: 1fr;" +  // Single column by default
+            "    min-width: 320px;" +
             "  }" +
             "  @media (min-width: 1024px) {" +
             "    .service-grid {" +
