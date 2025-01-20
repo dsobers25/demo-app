@@ -115,7 +115,8 @@ class HealthNavigatorView extends VerticalLayout {
             .set("padding", "var(--lumo-space-m)");
 
         Div contactAndTime = new Div();
-        contactAndTime.addClassName("contact-and-time");
+        contactAndTime.addClassName("alert-center-dim");
+
             contactAndTime.getStyle()
                             // .set("max-width", "60%")
                             .set("background-color", "#e7f5e9")

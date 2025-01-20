@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package com.demo.application.views;
+package com.demo.application.views.labs;
 
 import com.demo.application.alert.AlertService;
 import com.demo.application.history.TestHistoryService;
+import com.demo.application.views.MainLayout;
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
@@ -22,10 +24,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value="labs", layout=MainLayout.class)
+@Route(value="labs/bioMarker/001545", layout=MainLayout.class)
 @PageTitle("Labs")
-class LabsView extends VerticalLayout {
-    public LabsView() {
+class LabsBioMarker01View extends VerticalLayout {
+    public LabsBioMarker01View() {
         // Remove padding and spacing
         setPadding(false);
         setSpacing(false);
@@ -210,6 +212,80 @@ class LabsView extends VerticalLayout {
         TestHistoryService.getAlerts().forEach(test -> 
         scrollContainer.add(TestHistoryService.createTestHistoryDiv(test))
         );
+
+    // Create a div to hold the chart
+        Div chartContainer = new Div();
+        chartContainer.setId("chartContainer");
+        chartContainer.setWidth("661px");
+        chartContainer.setHeight("397px");
+
+        // Create the JavaScript for the chart
+        String jsCode = 
+    "const ctx = document.createElement('canvas');" +
+    "ctx.id = 'myChart';" +
+    "ctx.style.width = '661px';" +
+    "ctx.style.height = '397px';" +
+    "document.getElementById('chartContainer').appendChild(ctx);" +
+    
+    "new Chart(ctx, {" +
+    "   type: 'line'," +
+    "   data: {" +
+    "       labels: ['Jan 12 2023', 'Feb 12 2024', 'Jan 13 2025']," +
+    "       datasets: [" +
+    "           {" +  // Background green zone
+    "               data: [25, 25, 25]," +  // Horizontal line at y=25
+    "               fill: 'start'," +
+    "               backgroundColor: 'rgba(0, 255, 0, 0.3)'," +
+    "               borderWidth: 0," +
+    "               pointRadius: 0," +
+    "               order: 3" +  // Draw first (bottom layer)
+    "           }," +
+    "           {" +  // Background red zone
+    "               data: [45, 45, 45]," +  // Top of graph
+    "               fill: '-1'," +  // Fill to previous dataset
+    "               backgroundColor: 'rgba(255, 0, 0, 0.3)'," +
+    "               borderWidth: 0," +
+    "               pointRadius: 0," +
+    "               order: 2" +  // Draw second
+    "           }," +
+    "           {" +  // Actual data line
+    "               data: [20, 30, 40]," +
+    "               borderColor: 'white'," +
+    "               borderWidth: 2," +
+    "               pointRadius: 3," +
+    "               fill: false," +
+    "               order: 1" +  // Draw last (top layer)
+    "           }" +
+    "       ]" +
+    "   }," +
+    "   options: {" +
+    "       responsive: true," +
+    "       maintainAspectRatio: false," +
+    "       scales: {" +
+    "           y: {" +
+    "               min: 15," +
+    "               max: 45," +
+    "               ticks: {" +
+    "                   stepSize: 5" +
+    "               }" +
+    "           }" +
+    "       }," +
+    "       plugins: {" +
+    "           legend: {" +
+    "               display: false" +
+    "           }" +
+    "       }" +
+    "   }" +
+    "});";
+
+        // Add Chart.js library
+        UI.getCurrent().getPage().addJavaScript("https://cdn.jsdelivr.net/npm/chart.js");
+
+        // Execute the chart creation after the library is loaded
+        UI.getCurrent().getPage().executeJs(jsCode);
+
+        // Add the chart container to your layout
+        scrollContainer.add(chartContainer);
         
         // Add test content
         // for (int i = 0; i < 20; i++) {
