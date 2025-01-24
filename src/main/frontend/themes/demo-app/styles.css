@@ -97,7 +97,22 @@
     max-width: 595.86px;
 }
 
+.remove-left-side {
+    display: flex;
+}
+
+.shift-text {
+    align-items: right;
+}
+
 @media screen and (max-width: 1023px) {
+    .shift-text {
+        align-items: left;
+    }
+
+    .remove-left-side {
+        display: none;
+    }
 
     .alert-center-dim {
         max-width: 100%;
