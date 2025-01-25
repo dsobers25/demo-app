@@ -8,6 +8,7 @@ package com.demo.application.views;
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.BenefitsSideNav;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Paragraph;
@@ -117,7 +118,132 @@ class BenefitsView extends VerticalLayout {
         //     scrollContainer.add(new Div("Scroll content " + i));
         // }
 
-        H3 topLine = new H3("Virtual Healthcare");
+        Paragraph[] rightlinesOne = {
+            new Paragraph("Urgent Care Telemedicine"),
+            new Paragraph("Primary Care Telemedicine"),
+            new Paragraph("$500 in-network diagnostics"),
+            new Paragraph("per year plus 50%")
+        };
+
+
+        benefitsSections("Virtual Healthcare", "Benefit", rightlinesOne,
+        "View Virtual Healthcare benefit details", scrollContainer, "", false);
+
+
+        Paragraph[] rightlinesTwo = {
+            new Paragraph("Health advocacy & care navigation services"),
+            new Paragraph("that provide personal support for any"),
+            new Paragraph("healthcare challenge.")
+        };
+
+        benefitsSections("Health Navigator", "Benefit", rightlinesTwo,
+        "View Health Navigator benefit details", scrollContainer, "health-navigator", true);
+
+
+        Paragraph[] rightlinesThree = {
+            new Paragraph("100% in-network preventative care"),
+            new Paragraph("80% outpatient services"),
+            new Paragraph("80% inpatient hospital")
+        };
+
+        benefitsSections("Health Insurance", "Benefit", rightlinesThree,
+        "View Health Insurance benefit details", scrollContainer, "benefits/health-insurance", true);
+
+
+        Paragraph[] rightlinesFour = {
+            new Paragraph("24/7 toll-free counselling"),
+            new Paragraph("Crisis consultation")
+        };
+
+        benefitsSections("Mental Healthcare", "Benefit", rightlinesFour,
+        "", scrollContainer, "", true);
+
+
+        Paragraph[] rightlinesFive = {
+            new Paragraph("100% of Covered Services"),
+            new Paragraph("1 Routine Exam every 6 months"),
+            new Paragraph("1 Bitewing X-Ray every 12 months"),
+            new Paragraph("2 Cleanings every 12 months")
+        };
+
+        benefitsSections("Dental", "Benefit", rightlinesFive,
+        "View Dental benefit details", scrollContainer, "benefits/dental", true);
+
+
+        Paragraph[] rightlinesSix = {
+            new Paragraph("100% of Covered Services"),
+            new Paragraph("1 Routine Exam every 6 months"),
+            new Paragraph("1 Bitewing X-Ray every 12 months"),
+            new Paragraph("2 Cleanings every 12 months")
+        };
+
+        benefitsSections("Vision", "Benefit", rightlinesSix,
+        "View Dental benefit details", scrollContainer, "benefits/vision", true);
+
+
+        Paragraph[] rightlinesSeven = {
+            new Paragraph("60% of weekly salary to a maximum of "),
+            new Paragraph("$2,500 per week"),
+            new Paragraph("Elimination period: 0 days for accident and 7 "),
+            new Paragraph("days for Illness"),
+            new Paragraph("Benefit duration: 26 weeks")
+        };
+
+        benefitsSections("Long-term disability benefit", "Benefit", rightlinesSeven,
+        "", scrollContainer, "", true);
+
+
+        Paragraph[] rightlinesEight = {
+            new Paragraph("60% of weekly salary to a maximum of "),
+            new Paragraph("$15,000 per week"),
+            new Paragraph("Elimination period: 180 days"),
+            new Paragraph("Benefit duration: Up to age 65 or SSNRA,"),
+            new Paragraph("whichever is longest")
+        };
+
+        benefitsSections("Short-term disability benefit", "Benefit", rightlinesEight,
+        "", scrollContainer, "", true);
+
+
+        Paragraph[] rightlinesNine = {
+            new Paragraph("Employee Benefit for covered illness:"),
+            new Paragraph("$30,000"),
+            new Paragraph("Spouse Benefit for covered illness: $15,000"),
+            new Paragraph("Recurrence benefit included")
+        };
+
+        benefitsSections("Critical Illness Insurance Benefit", "Benefit", rightlinesNine,
+        "", scrollContainer, "", true);
+
+
+        Paragraph[] rightlinesTen = {
+            new Paragraph("High plan election"),
+            new Paragraph("Follow schedule of benefits for payable"),
+            new Paragraph("amount"),
+            new Paragraph("Guaranteed Issue and portability included")
+        };
+
+        benefitsSections("Accident Insurance Benefit", "Benefit", rightlinesTen,
+        "", scrollContainer, "", true);
+
+        Div spacer = new Div();
+        spacer.addClassName("alert-center-dim");
+        spacer.getStyle().set("height", "40px");
+
+        scrollContainer.add(spacer);
+
+
+        rightWrapper.add(scrollContainer);
+        return rightWrapper;
+    }
+
+    public void benefitsSections(String sectionTitle, String left, Paragraph[] rightLines,
+    String textForLink, Div scrollContainer, String route, boolean topMargin) {
+        // H3 topLine = new H3("Virtual Healthcare");
+        H3 topLine = new H3(sectionTitle);
+        if(topMargin) {
+            topLine.getStyle().set("margin-top", "56px");
+        }
         topLine.getStyle().set("margin-bottom", "20px");
             // contactAndTime.add(number, timeAndDay);
     
@@ -129,7 +255,6 @@ class BenefitsView extends VerticalLayout {
         benefitDiv.addClassName("alert-center-dim");
         benefitDiv.getStyle()
             .set("display", "flex")
-            
             .set("flex-direction", "column")
             .set("gap", "16px")
             .set("padding", "0px")
@@ -149,42 +274,30 @@ class BenefitsView extends VerticalLayout {
         leftSide.getStyle()
             .set("align-items", "center");
 
-        Paragraph leftline1 = new Paragraph("Benefit");
+        // Paragraph leftline1 = new Paragraph("Benefit");
+        Paragraph leftline1 = new Paragraph(left);
         leftSide.add(leftline1);
 
         // Right side
         Div rightSide = new Div();
         rightSide.addClassName("shift-text");
         rightSide.getStyle()
-            .set("max-width", "60%"); // Adjust as needed for text wrapping
+            .set("max-width", "60%") // Adjust as needed for text wrapping
+            .set("text-align", "right") // Add this to align all content right
+            .set("margin-left", "auto"); // This will push the div to the right
 
-        // Paragraph rightline1 = new Paragraph("Urgent Care Telemedicine");
-        // Paragraph rightline2 = new Paragraph("Primary Care Telemedicine");
-        // Paragraph rightline3 = new Paragraph("$500 in-network diagnostics");
-        // Paragraph rightline4 = new Paragraph("per year plus 50%");
 
-        // Set margin for paragraphs
-        // rightline1.getStyle().set("margin", "0");
-        // rightline2.getStyle().set("margin", "0");
-        // rightline3.getStyle().set("margin", "0");
-        // rightline4.getStyle().set("margin", "0");
-
-        // rightSide.add(rightline1, rightline2, rightline3, rightline4);
-
-        Paragraph[] rightlines = {
-            new Paragraph("Urgent Care Telemedicine"),
-            new Paragraph("Primary Care Telemedicine"),
-            new Paragraph("$500 in-network diagnostics"),
-            new Paragraph("per year plus 50%")
-        };
-
-        for(Paragraph p : rightlines) {
+        for(Paragraph p : rightLines) {
             p.getStyle().set("margin", "0");
             rightSide.add(p);
         }
 
         // Add left and right to content container
         contentDiv.add(leftSide, rightSide);
+
+        // Add all components to main container
+        benefitDiv.add(contentDiv);
+
 
         // Create bottom link section
         Div linkDiv = new Div();
@@ -196,7 +309,11 @@ class BenefitsView extends VerticalLayout {
             .set("cursor", "pointer")
             .set("border-top", "0.5px solid #E6E4E4");
 
-        Span linkText = new Span("View Virtual Healthcare benefit details");
+        //if route and textForLink are not null add clickable link section
+        if(route != "" && textForLink != "") {
+
+        // Span linkText = new Span("View Virtual Healthcare benefit details");
+        Span linkText = new Span(textForLink);
         Span arrow = new Span("→");
         arrow.getStyle()
             .set("font-size", "20px");
@@ -206,6 +323,7 @@ class BenefitsView extends VerticalLayout {
         // Add click listener to link div
         linkDiv.addClickListener(e -> {
             // Add your click handling here
+            UI.getCurrent().navigate(route);
         });
 
         // Style the link text
@@ -213,15 +331,11 @@ class BenefitsView extends VerticalLayout {
             .set("color", "#1976d2");  // or your preferred link color
 
         // Add all components to main container
-        benefitDiv.add(contentDiv, linkDiv);
+        benefitDiv.add(linkDiv);
+        
+    }
 
         // Add to scroll container
         scrollContainer.add(benefitDiv);
-
-
-
-
-        rightWrapper.add(scrollContainer);
-        return rightWrapper;
     }
 }
