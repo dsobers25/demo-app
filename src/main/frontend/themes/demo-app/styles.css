@@ -93,6 +93,10 @@
     max-width: 595.86px;
 }
 
+.card-center-dim {
+    max-width: 250px;
+}
+
 .alert-center-dim {
     max-width: 595.86px;
 }
@@ -106,6 +110,9 @@
 }
 
 @media screen and (max-width: 1023px) {
+    .card-center-dim {
+        max-width: 100%;
+    }
     .shift-text {
         align-items: left;
     }

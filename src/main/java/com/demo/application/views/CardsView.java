@@ -8,7 +8,11 @@ package com.demo.application.views;
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.CardsSideNav;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H5;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -56,8 +60,9 @@ class CardsView extends VerticalLayout {
 
     private Component createLeftContent() {
         Div leftWrapper = new Div();
+        leftWrapper.addClassName("left-wrapper");
         leftWrapper.getStyle()
-            .set("width", "30%")
+            // .set("width", "30%")
             .set("height", "100%")
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
@@ -90,8 +95,9 @@ class CardsView extends VerticalLayout {
     private Component createRightContent() {
         // Create a wrapper for the right content
         Div rightWrapper = new Div();
+        rightWrapper.addClassName("right-wrapper");
         rightWrapper.getStyle()
-            .set("width", "70%")
+            // .set("width", "70%")
             .set("height", "100%")
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
@@ -108,11 +114,151 @@ class CardsView extends VerticalLayout {
             .set("padding", "var(--lumo-space-m)");
 
         // Add test content
-        for (int i = 0; i < 20; i++) {
-            scrollContainer.add(new Div("Scroll content " + i));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     scrollContainer.add(new Div("Scroll content " + i));
+        // }
+
+         Div cardsSectionDiv = new Div();
+         cardsSectionDiv.getStyle()
+                .set("width", "100%")
+                .set("margin-top", "16px")    // Add spacing between top and bottom sections
+                .set("display", "grid")       // Use grid layout
+                .set("gap", "40px")          // Spacing between cards
+                .set("max-width", "1000px"); // Max width as requested
+                // Remove the margin-left: auto and margin-right: auto
+
+        // Add media query for responsive grid
+        UI.getCurrent().getElement().executeJs(
+            "const style = document.createElement('style');" +
+            "style.textContent = `" +
+            "  .service-grid {" +
+            "    grid-template-columns: 2fr;" +  // Single column by default
+            // "    min-width: 320px;" +
+            "  }" +
+            "  @media (min-width: 1024px) {" +
+            "    .service-grid {" +
+            // "      grid-template-columns: 1fr 1fr;" +  // Two columns on wider screens
+            "      grid-template-columns: repeat(2, minmax(0, 1fr));" +  // Two columns on wider screens
+            //repeat(2, minmax(0, 1fr));
+            "    }" +
+            "  }`;" +
+            "document.head.appendChild(style);");
+
+            cardsSectionDiv.addClassName("service-grid");
+
+        // Add all service cards
+        cardsSectionDiv.add(
+            createServiceCard("View Health Insurance card"),
+            createServiceCard("View Dental card"),
+            createServiceCard("View Vision card"),
+            createServiceCard("View Prescription Savings card"),
+            createServiceCard("View Health Navigator card")
+        );
+
+        scrollContainer.add(cardsSectionDiv);
 
         rightWrapper.add(scrollContainer);
         return rightWrapper;
+    }
+
+
+    // Add this helper method to your class
+    private Div createServiceCard(String title) {
+        Div card = new Div();
+        card.getStyle()
+            .set("position", "relative")
+            .set("box-sizing", "border-box")
+            .set("border-radius", "16px")
+            .set("border", "1px solid #E6E5E5")
+            .set("padding", "0px")       // Reduced padding
+            .set("width", "100%")  // Make card width match column
+            .set("max-width", "340px") // Prevent too wide
+            .set("margin-bottom", "30px"); // Center in column
+
+        
+        
+        switch (title) {
+            case "View Health Insurance card":
+            Image svgImage = new Image("https://demo.virtualwellness.care/assets/images/health-insurance-card.png", "vision card");
+                    svgImage.setWidth("100%");
+                    svgImage.setMaxWidth("340px");
+                    svgImage.getStyle()
+                    .set("border-radius", "16px 16px 0 0"); // Match card's top corners
+                    card.add(svgImage);
+
+                break;
+            case "View Dental card":
+            Image svgImage2 = new Image("https://demo.virtualwellness.care/assets/images/dental-card.png", "vision card");
+                svgImage2.setWidth("100%");
+                svgImage2.setMaxWidth("340px");
+                svgImage2.getStyle()
+                .set("border-radius", "16px 16px 0 0"); 
+                card.add(svgImage2);
+
+                break;
+            case "View Vision card":
+            Image svgImage3 = new Image("https://demo.virtualwellness.care/assets/images/vision-card.png", "vision card");
+                    svgImage3.setWidth("100%");
+                    svgImage3.setMaxWidth("340px");
+                    svgImage3.getStyle()
+                    .set("border-radius", "16px 16px 0 0"); 
+                    card.add(svgImage3);
+            break;
+            case "View Prescription Savings card":
+            Image svgImage4 = new Image("https://demo.virtualwellness.care/assets/images/prescription-card.png", "vision card");
+                    svgImage4.setWidth("100%");
+                    svgImage4.setMaxWidth("340px");
+                    svgImage4.getStyle()
+                    .set("border-radius", "16px 16px 0 0"); 
+                    card.add(svgImage4);
+            break;
+            case "View Health Navigator card":
+            Image svgImage5 = new Image("https://demo.virtualwellness.care/assets/images/health-navigator-card.png", "vision card");
+                    svgImage5.setWidth("100%");
+                    svgImage5.setMaxWidth("340px");
+                    svgImage5.getStyle()
+                    .set("border-radius", "16px 16px 0 0"); 
+                    card.add(svgImage5);
+            break;
+        }
+        
+        // svgImage.getElement().addEventListener("click", e -> {
+        //     UI.getCurrent().navigate("");
+        // });
+        
+            String linkText = title;
+
+            Paragraph learnMore = new Paragraph(linkText + " →");
+            learnMore.getStyle()
+            .set("position", "relative")
+            .set("display", "block") // Makes paragraph block-level
+            .set("text-align", "center") // Center the text
+            .set("padding", "10px") // Add some padding
+            .set("font-size", "14px")
+            .set("cursor", "pointer"); // Add cursor pointer to show it's clickable
+        
+            // Add click listener based on the title/linkText
+            learnMore.addClickListener(e -> {
+                switch (title) {
+                    case "View Health Insurance card":
+                        UI.getCurrent().navigate("cards/health-insurance");
+                        break;
+                    case "View Dental card":
+                        UI.getCurrent().navigate("cards/dental");
+                        break;
+                    case "View Vision card":
+                        UI.getCurrent().navigate("cards/vision");
+                        break;
+                    case "View Prescription Savings card":
+                        UI.getCurrent().navigate("cards/prerscription-savings");
+                        break;
+                    case "View Health Navigator card":
+                        UI.getCurrent().navigate("cards/health-navigator");
+                        break;
+                }
+            });
+
+        card.add(learnMore);
+        return card;
     }
 }

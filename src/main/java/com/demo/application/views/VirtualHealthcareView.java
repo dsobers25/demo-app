@@ -175,8 +175,9 @@ class VirtualHealthcareView extends VerticalLayout {
     
     private Component createRightContent() {
         Div rightWrapper = new Div();
+        rightWrapper.addClassName("right-wrapper");
         rightWrapper.getStyle()
-            .set("width", "70%")
+            // .set("width", "70%")
             .set("height", "100%")
             .set("overflow", "hidden")
             .set("display", "flex")
