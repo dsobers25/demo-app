@@ -160,7 +160,17 @@ class LabsView extends VerticalLayout {
 
         scrollContainer.add(alertCenterDiv);
 
-        AlertService.getAlerts().forEach(alert -> 
+        String[][] data = {
+            {"ALT (SGPT)", "HIGH", "labs/bioMarker/001545"},
+            {"AST (SGOT)", "HIGH", "labs/bioMarker/001545"},
+            {"BUN", "HIGH", "labs/bioMarker/001545"},
+            {"Glucose", "HIGH", "labs/bioMarker/001545"},
+            {"Hemoglobin A1c", "HIGH", "labs/bioMarker/001545"},
+            {"Protein, Total", "LOW", "labs/bioMarker/001545"},
+            {"Sodium", "HIGH", "labs/bioMarker/001545"}
+        };
+
+        AlertService.getAlerts(data).forEach(alert -> 
         scrollContainer.add(AlertService.createAlertDiv(alert))
         );
 

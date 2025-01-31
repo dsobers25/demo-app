@@ -5,6 +5,7 @@ package com.demo.application.history;
 public class TestHistory {
     private final String label;
     private final String status;
+    // field will be reused
     private final String route;
 
     public TestHistory(String label, String status, String route) {
