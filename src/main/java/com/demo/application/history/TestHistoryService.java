@@ -20,9 +20,9 @@ import java.util.List;
 public class TestHistoryService {
     public static List<TestHistory> getAlerts() {
         return Arrays.asList(
-            new TestHistory("Jan 13th 2025", "7 ALERTS", "alt-details"),
-            new TestHistory("Feb 2nd 2024", "8 ALERTS", "ast-details"),
-            new TestHistory("Jan 12th 2023", "9 ALERTS", "bun-details")
+            new TestHistory("Jan 13th 2025", "7 ALERTS", "/labs/abc123"),
+            new TestHistory("Feb 2nd 2024", "8 ALERTS", "/labs/abc123"),
+            new TestHistory("Jan 12th 2023", "9 ALERTS", "/labs/abc123")
         );
     }
     public static List<AlertData> getAlerts(String[][] alertsData) {

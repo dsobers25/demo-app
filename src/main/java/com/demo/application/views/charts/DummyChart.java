@@ -1,8 +1,6 @@
 package com.demo.application.views.charts;
 
 public class DummyChart {
-
-    // Create the JavaScript for the chart
     public static String jsCode = 
     "const ctx = document.createElement('canvas');" +
     "ctx.id = 'myChart';" +
@@ -13,31 +11,36 @@ public class DummyChart {
     "new Chart(ctx, {" +
     "   type: 'line'," +
     "   data: {" +
-    "       labels: ['Jan 12 2023', 'Feb 12 2024', 'Jan 13 2025']," +
+    "       labels: ['Jan 24 2023', 'Feb 14 2024', 'Jan 25 2025']," +
     "       datasets: [" +
     "           {" +  // Background green zone
-    "               data: [25, 25, 25]," +  // Horizontal line at y=25
-    "               fill: 'start'," +
+    "               data: [44, 44, 44]," +  // Horizontal line at y=44 (top of green zone)
+    "               fill: 'start'," +       // Fill to bottom
     "               backgroundColor: 'rgb(80,142,59)'," +
     "               borderWidth: 0," +
     "               pointRadius: 0," +
-    "               order: 3" +  // Draw first (bottom layer)
+    "               order: 3" +
     "           }," +
     "           {" +  // Background red zone
-    "               data: [45, 45, 45]," +  // Top of graph
-    "               fill: '-1'," +  // Fill to previous dataset
+    "               data: [85, 85, 85]," +  // Top of graph
+    "               fill: '-1'," +          // Fill to previous dataset (green zone)
     "               backgroundColor: 'rgb(187,49,13)'," +
     "               borderWidth: 0," +
     "               pointRadius: 0," +
-    "               order: 2" +  // Draw second
+    "               order: 2" +
     "           }," +
     "           {" +  // Actual data line
-    "               data: [20, 30, 40]," +
+    "               data: [67, 52, 50]," +
     "               borderColor: 'white'," +
-    "               borderWidth: 2," +
-    "               pointRadius: 3," +
+    "               borderWidth: 3," +
+    "               tension: 0.4," +        // This makes the line curved (0 to 1, higher = more curved)
+    "               pointRadius: 6," +
+    // "               pointBackgroundColor: 'white'," +
+    "               pointBackgroundColor: 'rgba(255, 255, 255, 0.5)'," + // White with 50% opacity"
+    "               pointBorderColor: 'white'," +
+    "               pointBorderWidth: 2," +
     "               fill: false," +
-    "               order: 1" +  // Draw last (top layer)
+    "               order: 1" +
     "           }" +
     "       ]" +
     "   }," +
@@ -46,8 +49,8 @@ public class DummyChart {
     "       maintainAspectRatio: false," +
     "       scales: {" +
     "           y: {" +
-    "               min: 15," +
-    "               max: 45," +
+    "               min: 40," +
+    "               max: 85," +
     "               ticks: {" +
     "                   stepSize: 5" +
     "               }" +
@@ -60,5 +63,4 @@ public class DummyChart {
     "       }" +
     "   }" +
     "});";
-
 }

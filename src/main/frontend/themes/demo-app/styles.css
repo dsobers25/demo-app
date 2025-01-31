@@ -89,6 +89,12 @@
     max-width: 60vw;
 }
 
+
+.license-counselor-x {
+    max-width: 1024px;
+    height: auto;
+}
+
 .license-counselor {
     max-width: 595.86px;
     height: auto;

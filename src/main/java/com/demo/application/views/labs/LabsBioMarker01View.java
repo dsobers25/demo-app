@@ -288,7 +288,8 @@ class LabsBioMarker01View extends VerticalLayout {
 
     // Create a div to hold the chart
         Div chartContainer = new Div();
-        chartContainer.getStyle().set("margin-top","20px");
+        chartContainer.getStyle().set("margin-top","20px")
+        .set("margin-bottom","60px");
         chartContainer.setId("chartContainer");
         chartContainer.setWidth("661px");
         chartContainer.setHeight("397px");
