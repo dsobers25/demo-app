@@ -208,7 +208,8 @@ public class CardsVisionView  extends VerticalLayout {
             
             switch (title) {
                 case "View Health Insurance card":
-                Image svgImage = new Image("https://demo.virtualwellness.care/assets/images/health-insurance-card.png", "vision card");
+                // Image svgImage = new Image("https://demo.virtualwellness.care/assets/images/health-insurance-card.png", "vision card");
+                Image svgImage = new Image("./images/health-insurance-card.png", "vision card");
                         svgImage.setWidth("100%");
                         svgImage.setMaxWidth("340px");
                         svgImage.getStyle()
@@ -217,7 +218,8 @@ public class CardsVisionView  extends VerticalLayout {
     
                     break;
                 case "View Dental card":
-                Image svgImage2 = new Image("https://demo.virtualwellness.care/assets/images/dental-card.png", "vision card");
+                Image svgImage2 = new Image("./images/dental-card.png", "dental card");
+                // Image svgImage2 = new Image("https://demo.virtualwellness.care/assets/images/dental-card.png", "vision card");
                     svgImage2.setWidth("100%");
                     svgImage2.setMaxWidth("340px");
                     svgImage2.getStyle()
@@ -226,7 +228,8 @@ public class CardsVisionView  extends VerticalLayout {
     
                     break;
                 case "View Vision card":
-                Image svgImage3 = new Image("https://demo.virtualwellness.care/assets/images/vision-card.png", "vision card");
+                // Image svgImage3 = new Image("https://demo.virtualwellness.care/assets/images/vision-card.png", "vision card");
+                Image svgImage3 = new Image("./images/vision-card.png", "vision card");
                         svgImage3.setWidth("100%");
                         svgImage3.setMaxWidth("340px");
                         svgImage3.getStyle()
@@ -234,7 +237,8 @@ public class CardsVisionView  extends VerticalLayout {
                         card.add(svgImage3);
                 break;
                 case "View Prescription Savings card":
-                Image svgImage4 = new Image("https://demo.virtualwellness.care/assets/images/prescription-card.png", "vision card");
+                // Image svgImage4 = new Image("https://demo.virtualwellness.care/assets/images/prescription-card.png", "vision card");
+                Image svgImage4 = new Image("./images/prescription-card.png", "prescription card");
                         svgImage4.setWidth("100%");
                         svgImage4.setMaxWidth("340px");
                         svgImage4.getStyle()
@@ -242,7 +246,8 @@ public class CardsVisionView  extends VerticalLayout {
                         card.add(svgImage4);
                 break;
                 case "View Health Navigator card":
-                Image svgImage5 = new Image("https://demo.virtualwellness.care/assets/images/health-navigator-card.png", "vision card");
+                // Image svgImage5 = new Image("https://demo.virtualwellness.care/assets/images/health-navigator-card.png", "vision card");
+                Image svgImage5 = new Image("./images/health-navigator-card.png", "health navigator card");
                         svgImage5.setWidth("100%");
                         svgImage5.setMaxWidth("340px");
                         svgImage5.getStyle()
@@ -279,7 +284,7 @@ public class CardsVisionView  extends VerticalLayout {
                             UI.getCurrent().navigate("cards/vision");
                             break;
                         case "View Prescription Savings card":
-                            UI.getCurrent().navigate("cards/prerscription-savings");
+                            UI.getCurrent().navigate("cards/prescription-savings");
                             break;
                         case "View Health Navigator card":
                             UI.getCurrent().navigate("cards/health-navigator");

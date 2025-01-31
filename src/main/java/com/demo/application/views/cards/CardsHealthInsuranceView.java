@@ -279,7 +279,7 @@ public class CardsHealthInsuranceView  extends VerticalLayout {
                         UI.getCurrent().navigate("cards/vision");
                         break;
                     case "View Prescription Savings card":
-                        UI.getCurrent().navigate("cards/prerscription-savings");
+                        UI.getCurrent().navigate("cards/prescription-savings");
                         break;
                     case "View Health Navigator card":
                         UI.getCurrent().navigate("cards/health-navigator");
