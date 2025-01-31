@@ -126,9 +126,7 @@ class LabsView extends VerticalLayout {
         Div testOrderTopSectionDiv = new Div();
         testOrderTopSectionDiv.addClassName("license-counselor");
             testOrderTopSectionDiv.getStyle()
-                            // .set("max-width", "60%")
                             .set("background-color", "#e7f5e9")
-                            .set("max-height", "25%")
                             .set("margin-bottom", "12px")
                             .set("padding", "16px")
                             .set("background-color", "#e7f5e9")
@@ -139,7 +137,7 @@ class LabsView extends VerticalLayout {
         Paragraph testOrderSubText = new Paragraph("A doctor has ordered lab tests for you.");
         
         // Create the "learn more" link
-        Anchor learnMoreLink = new Anchor("your-target-page", "Click here to learn more →");
+        Anchor learnMoreLink = new Anchor("/labs/new", "Click here to learn more →");
         learnMoreLink.getStyle()
             .set("display", "block")
             .set("text-align", "right")
@@ -170,9 +168,7 @@ class LabsView extends VerticalLayout {
         Div discussLabSectionDiv = new Div();
         discussLabSectionDiv.addClassName("license-counselor");
             discussLabSectionDiv.getStyle()
-                            // .set("max-width", "60%")
                             .set("background-color", "#e7f5e9")
-                            .set("max-height", "25%")
                             .set("margin-bottom", "12px")
                             .set("margin-top", "30px")
                             .set("padding", "16px")
