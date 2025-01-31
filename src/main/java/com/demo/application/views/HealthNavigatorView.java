@@ -10,6 +10,7 @@ import com.demo.application.views.sidenav.SideNav;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.UnorderedList;
@@ -33,9 +34,12 @@ class HealthNavigatorView extends VerticalLayout {
         mainContainer.setPadding(false);
         mainContainer.setSpacing(false);
         mainContainer.setSizeFull();
+
+        Image sunLife = new Image("./images/Sun_Life_weblogo_127x31.svg", "sun-life");
         
         // Add the header
-        DynamicHeader header = new DynamicHeader("Got a problem?", "We've got your back!");
+        DynamicHeader header = new DynamicHeader("Got a problem?", "We've got your back!", sunLife);
+        // DynamicHeader header = new DynamicHeader("Got a problem?", "We've got your back!");
         // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
         
         // Create content wrapper for the scrollable areas

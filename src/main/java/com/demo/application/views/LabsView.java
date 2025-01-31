@@ -14,6 +14,7 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -37,9 +38,12 @@ class LabsView extends VerticalLayout {
         mainContainer.setPadding(false);
         mainContainer.setSpacing(false);
         mainContainer.setSizeFull();
+
+        Image labcorp = new Image("./images/Labcorp_Logo.svg", "labcorp");
         
         // Add the header
-        DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!");
+        DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!", labcorp);
+        // DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!");
         // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
         
         // Create content wrapper for the scrollable areas

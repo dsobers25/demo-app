@@ -3,15 +3,25 @@ package com.demo.application.views.header;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 
 public class DynamicHeader extends Div {
     private final String pageGreeting;
     private final String subText;
+    private final Image img;
 
     public DynamicHeader(String pageGreeting, String subText) {
         this.pageGreeting = pageGreeting;
         this.subText = subText;
+        this.img = null;
+        configureHeader();
+    }
+
+    public DynamicHeader(String pageGreeting, String subText, Image img) {
+        this.pageGreeting = pageGreeting;
+        this.subText = subText;
+        this.img = img;
         configureHeader();
     }
 
@@ -31,6 +41,8 @@ public class DynamicHeader extends Div {
 
         addClassName("header-height");
 
+        
+
         H1 greeting = new H1(pageGreeting);
             greeting.getStyle()
                 .set("text-align", "center")
@@ -48,6 +60,19 @@ public class DynamicHeader extends Div {
 
 
         subTextParagraph.addClassName("subText");
+
+        if(this.img != null) {
+            Image image = this.img;
+            image.setWidth("120px");
+            
+            image.getStyle()
+                .set("display", "block")
+                .set("margin-left", "auto")
+                .set("margin-right", "auto");
+            
+            add(image);
+        }
+        
 
         add(greeting, subTextParagraph);
     }
