@@ -244,6 +244,8 @@ class VirtualHealthcareView extends VerticalLayout {
                 .set("margin-bottom", "33px")     // Add some space above button
                 .set("cursor", "pointer");      // Add pointer cursor
 
+                openRecuroHealthButton.addClickListener(e -> UI.getCurrent().navigate("/recuro-health"));
+
         
         rightWrapper.add(scrollContainer);
         rightWrapper.add(openRecuroHealthButton);
