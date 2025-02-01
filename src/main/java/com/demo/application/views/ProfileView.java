@@ -61,14 +61,15 @@ public class ProfileView extends VerticalLayout {
  
      private Component createLeftContent() {
          Div leftWrapper = new Div();
-         leftWrapper.getStyle()
-             .set("width", "30%")
+         leftWrapper.addClassName("left-wrapper");
+            leftWrapper.getStyle()
+            // .set("width", "30%")
              .set("height", "100%")
              .set("overflow", "hidden") // Hide wrapper overflow
              .set("display", "flex")
              .set("flex-direction", "column")
-             .set("margin", "0")
-             .set("padding-right", "16px"); // Add padding to the right side
+             .set("margin", "0");
+            //  .set("padding-right", "16px"); // Add padding to the right side
  
  
          // Get the original left side content
@@ -95,8 +96,9 @@ public class ProfileView extends VerticalLayout {
      private Component createRightContent() {
          // Create a wrapper for the right content
          Div rightWrapper = new Div();
-         rightWrapper.getStyle()
-             .set("width", "70%")
+         rightWrapper.addClassName("right-wrapper");
+            rightWrapper.getStyle()
+            // .set("width", "70%")
              .set("height", "100%")
              .set("overflow", "hidden") // Hide wrapper overflow
              .set("display", "flex")

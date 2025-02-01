@@ -70,8 +70,8 @@ public class BenefitsAndDependents extends VerticalLayout {
              .set("overflow", "hidden") // Hide wrapper overflow
              .set("display", "flex")
              .set("flex-direction", "column")
-             .set("margin", "0")
-             .set("padding-right", "16px"); // Add padding to the right side
+             .set("margin", "0");
+            //  .set("padding-right", "16px"); // Add padding to the right side
  
  
          // Get the original left side content

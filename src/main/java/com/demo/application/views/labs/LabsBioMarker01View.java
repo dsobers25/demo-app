@@ -287,21 +287,38 @@ class LabsBioMarker01View extends VerticalLayout {
         );
 
     // Create a div to hold the chart
+        // Div chartContainer = new Div();
+        // chartContainer.getStyle().set("margin-top","20px")
+        // .set("margin-bottom","60px");
+        // chartContainer.setId("chartContainer");
+        // chartContainer.setWidth("661px");
+        // chartContainer.setHeight("397px");
+
+        // Create a div to hold the chart
         Div chartContainer = new Div();
-        chartContainer.getStyle().set("margin-top","20px")
-        .set("margin-bottom","60px");
+        chartContainer.getStyle().set("margin-top", "20px")
+            .set("margin-bottom", "60px");
         chartContainer.setId("chartContainer");
         chartContainer.setWidth("661px");
         chartContainer.setHeight("397px");
 
-        // Create the JavaScript for the chart
-        String jsCode = DummyChart.jsCode;
-
         // Add Chart.js library
         UI.getCurrent().getPage().addJavaScript("https://cdn.jsdelivr.net/npm/chart.js");
 
-        // Execute the chart creation after the library is loaded
+        // Modify the JavaScript code to check if Chart.js is loaded
+        String jsCode = 
+            "const checkChartJs = setInterval(() => {" +
+            "    if (window.Chart) {" +
+            "        clearInterval(checkChartJs);" +
+                DummyChart.jsCode +
+            "    }" +
+            "}, 100);";
+
+        // Execute the modified JavaScript
         UI.getCurrent().getPage().executeJs(jsCode);
+
+// Add the chart container to your layout
+// scrollContainer.add(chartContainer);
 
         // Add the chart container to your layout
         scrollContainer.add(chartContainer);
