@@ -106,66 +106,76 @@ public class HomeView extends VerticalLayout {
         // for (int i = 0; i < 20; i++) {
         //     scrollContainer.add(new Div("Scroll content " + i));
         // }
-
         Div topSectionDiv = new Div();
-            topSectionDiv.getStyle().set("width", "100%");;
-
-        // Make topItem a positioning context and ensure proper layout
+        topSectionDiv.getStyle().set("width", "100%");
+        
         Div topItem = new Div();
         topItem.addClassName("top-item");
         topItem.getStyle()
-            .set("position", "relative")  // Make it a positioning context
-            .set("height", "107.36px")
-            .set("box-sizing", "border-box")
+            .set("display", "flex")
+            .set("flex-direction", "column")
             .set("background-color", "#e7f5e9")
-            .set("border-radius", "16px 16px 16px 16px")
+            .set("border-radius", "16px")
             .set("border", "1px solid #E6E5E5")
             .set("padding", "16px")
             .set("margin-bottom", "40px");
-
-        // Add main content
+            // .set("width", "100%");
+        
+        // Content container for main text and subtext
+        Div contentDiv = new Div();
+        contentDiv.getStyle()
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("gap", "4px");
+        
         H5 mainText = new H5("You have a test order");
-        mainText.getStyle().set("font-size", "20px")
-            .set("margin", "0");  // Remove default margins
-
+        mainText.getStyle()
+            .set("font-size", "20px")
+            .set("margin", "0");
+        
         Paragraph subText = new Paragraph("A doctor has ordered lab tests for you.");
         subText.getStyle()
-            .set("margin", "4px 0");  // Adjust spacing as needed
-
-        // Position learn more text
+            .set("margin", "0");
+        
+        // Learn more link
         Paragraph learnMore = new Paragraph("Click here to learn more →");
         learnMore.getStyle()
-            .set("position", "absolute")  // Position absolutely within the relative parent
-            .set("bottom", "16px")       // Match parent's padding
-            .set("right", "16px")        // Match parent's padding
-            .set("margin", "0");         // Remove default paragraph margins
-
-        topItem.add(mainText, subText, learnMore);
-
+            .set("margin", "16px 0 0 0")  // Top margin to separate from content
+            .set("align-self", "flex-end");  // Align to the right
+        
+        contentDiv.add(mainText, subText);
+        topItem.add(contentDiv, learnMore);
 
         topSectionDiv.add(topItem);
 
 
         Div bottomSectionDiv = new Div();
-            bottomSectionDiv.getStyle()
-                .set("width", "100%")
-                .set("margin-top", "16px")    // Add spacing between top and bottom sections
-                .set("display", "grid")       // Use grid layout
-                .set("gap", "16px")          // Spacing between cards
-                .set("max-width", "1000px"); // Max width as requested
-                // Remove the margin-left: auto and margin-right: auto
+        bottomSectionDiv.getStyle()
+            .set("width", "100%")
+            .set("margin-top", "16px")
+            .set("display", "grid")
+            .set("gap", "16px")
+            .set("max-width", "1000px")
+            // Add these styles to prevent overlap
+            .set("word-wrap", "break-word")
+            .set("overflow-wrap", "break-word")
+            .set("white-space", "normal")
+            .set("min-width", "0");
 
-        // Add media query for responsive grid
+        // Add media query for responsive grid using a more robust approach
         UI.getCurrent().getElement().executeJs(
             "const style = document.createElement('style');" +
             "style.textContent = `" +
             "  .service-grid {" +
-            "    grid-template-columns: 1fr;" +  // Single column by default
-            "    min-width: 320px;" +
+            "    display: grid;" +
+            "    grid-template-columns: minmax(0, 1fr);" +  // Single column with min width 0
+            "    gap: 16px;" +
+            "    width: 100%;" +
+            "    overflow: hidden;" +  // Prevent overflow
             "  }" +
             "  @media (min-width: 1024px) {" +
             "    .service-grid {" +
-            "      grid-template-columns: 1fr 1fr;" +  // Two columns on wider screens
+            "      grid-template-columns: repeat(2, minmax(0, 1fr));" +  // Two equal columns
             "    }" +
             "  }`;" +
             "document.head.appendChild(style);");
@@ -202,55 +212,63 @@ public class HomeView extends VerticalLayout {
     private Div createServiceCard(String title, String description, String linkText) {
         Div card = new Div();
         card.getStyle()
-            .set("position", "relative")
-            .set("height", "174px")
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("min-height", "174px")  // Changed from fixed height to min-height
             .set("box-sizing", "border-box")
-            // .set("background-color", "#e7f5e9")
             .set("border-radius", "16px")
             .set("border", "1px solid #E6E5E5")
-            .set("padding", "16px");
-
+            .set("padding", "16px")
+            .set("word-wrap", "break-word")
+            .set("overflow-wrap", "break-word");
+    
+        // Content container for title and description
+        Div contentDiv = new Div();
+        contentDiv.getStyle()
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("gap", "4px")
+            .set("flex", "1");  // Take up remaining space
+    
         H5 titleText = new H5(title);
         titleText.getStyle()
             .set("font-size", "20px")
             .set("margin", "0");
-
+    
         Paragraph descText = new Paragraph(description);
         descText.getStyle()
             .set("margin", "4px 0")
             .set("font-size", "14px");
-
-            Paragraph learnMore = new Paragraph(linkText + " →");
-            learnMore.getStyle()
-                .set("position", "absolute")
-                .set("bottom", "16px")
-                .set("right", "16px")
-                .set("margin", "0")
-                .set("font-size", "14px")
-                .set("cursor", "pointer");  // Add cursor pointer to show it's clickable
-        
-            // Add click listener based on the title/linkText
-            learnMore.addClickListener(e -> {
-                switch (title) {
-                    case "Virtual Healthcare":
-                        UI.getCurrent().navigate("virtual-healthcare");
-                        break;
-                    case "Labs":
-                        UI.getCurrent().navigate("labs");
-                        break;
-                    case "Health Navigator":
-                        UI.getCurrent().navigate("health-navigator");
-                        break;
-                    case "Benefits":
-                        UI.getCurrent().navigate("benefits");
-                        break;
-                    case "Membership Cards":
-                        UI.getCurrent().navigate("cards");
-                        break;
-                }
-            });
-
-        card.add(titleText, descText, learnMore);
+    
+        Paragraph learnMore = new Paragraph(linkText + " →");
+        learnMore.getStyle()
+            .set("margin", "16px 0 0 auto")  // Push to bottom-right with margin
+            .set("font-size", "14px")
+            .set("cursor", "pointer");
+    
+        // Add click listener based on the title/linkText
+        learnMore.addClickListener(e -> {
+            switch (title) {
+                case "Virtual Healthcare":
+                    UI.getCurrent().navigate("virtual-healthcare");
+                    break;
+                case "Labs":
+                    UI.getCurrent().navigate("labs");
+                    break;
+                case "Health Navigator":
+                    UI.getCurrent().navigate("health-navigator");
+                    break;
+                case "Benefits":
+                    UI.getCurrent().navigate("benefits");
+                    break;
+                case "Membership Cards":
+                    UI.getCurrent().navigate("cards");
+                    break;
+            }
+        });
+    
+        contentDiv.add(titleText, descText);
+        card.add(contentDiv, learnMore);
         return card;
     }
 }

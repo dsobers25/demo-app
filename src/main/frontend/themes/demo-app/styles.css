@@ -78,7 +78,7 @@
 
 .top-item {
     max-width: 595.86px;
-    min-width: 390.94px;
+    /* min-width: 390.94px; */
 }
 
 .dropdown-container { /* not working as expected 1/19/2025 */

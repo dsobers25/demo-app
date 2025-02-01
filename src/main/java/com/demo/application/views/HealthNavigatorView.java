@@ -99,9 +99,9 @@ class HealthNavigatorView extends VerticalLayout {
     private Component createRightContent() {
         // Create a wrapper for the right content
         Div rightWrapper = new Div();
-        
+        rightWrapper.addClassName("right-wrapper");
         rightWrapper.getStyle()
-            .set("width", "70%")
+            // .set("width", "70%")
             .set("height", "100%")
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
@@ -124,7 +124,7 @@ class HealthNavigatorView extends VerticalLayout {
             contactAndTime.getStyle()
                             // .set("max-width", "60%")
                             .set("background-color", "#e7f5e9")
-                            .set("max-height", "20%")
+                            .set("height", "auto")
                             .set("padding", "16px")
                             .set("background-color", "#e7f5e9")
                             .set("border-radius", "16px 16px 16px 16px")

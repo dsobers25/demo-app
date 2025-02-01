@@ -4,8 +4,16 @@ public class DummyChart {
     public static String jsCode = 
     "const ctx = document.createElement('canvas');" +
     "ctx.id = 'myChart';" +
-    "ctx.style.width = '661px';" +
-    "ctx.style.height = '397px';" +
+    // Set initial dimensions but make it responsive
+    "ctx.style.width = '623px';" +
+    "ctx.style.height = '374px';" +
+    "ctx.style.maxWidth = '100%';" +  // Make it responsive
+    "ctx.style.display = 'block';" +
+    "ctx.style.boxSizing = 'border-box';" +
+    
+    "const container = document.getElementById('chartContainer');" +
+    "container.style.width = 'fit-content';" +
+    "container.style.maxWidth = '100%';" + // Allow container to shrink on smaller screens
     "document.getElementById('chartContainer').appendChild(ctx);" +
     
     "new Chart(ctx, {" +
@@ -13,30 +21,29 @@ public class DummyChart {
     "   data: {" +
     "       labels: ['Jan 24 2023', 'Feb 14 2024', 'Jan 25 2025']," +
     "       datasets: [" +
-    "           {" +  // Background green zone
-    "               data: [44, 44, 44]," +  // Horizontal line at y=44 (top of green zone)
-    "               fill: 'start'," +       // Fill to bottom
+    "           {" +
+    "               data: [44, 44, 44]," +
+    "               fill: 'start'," +
     "               backgroundColor: 'rgb(80,142,59)'," +
     "               borderWidth: 0," +
     "               pointRadius: 0," +
     "               order: 3" +
     "           }," +
-    "           {" +  // Background red zone
-    "               data: [85, 85, 85]," +  // Top of graph
-    "               fill: '-1'," +          // Fill to previous dataset (green zone)
+    "           {" +
+    "               data: [85, 85, 85]," +
+    "               fill: '-1'," +
     "               backgroundColor: 'rgb(187,49,13)'," +
     "               borderWidth: 0," +
     "               pointRadius: 0," +
     "               order: 2" +
     "           }," +
-    "           {" +  // Actual data line
+    "           {" +
     "               data: [67, 52, 50]," +
     "               borderColor: 'white'," +
     "               borderWidth: 3," +
-    "               tension: 0.4," +        // This makes the line curved (0 to 1, higher = more curved)
+    "               tension: 0.4," +
     "               pointRadius: 6," +
-    // "               pointBackgroundColor: 'white'," +
-    "               pointBackgroundColor: 'rgba(255, 255, 255, 0.5)'," + // White with 50% opacity"
+    "               pointBackgroundColor: 'rgba(255, 255, 255, 0.5)'," +
     "               pointBorderColor: 'white'," +
     "               pointBorderWidth: 2," +
     "               fill: false," +
@@ -46,7 +53,8 @@ public class DummyChart {
     "   }," +
     "   options: {" +
     "       responsive: true," +
-    "       maintainAspectRatio: false," +
+    "       maintainAspectRatio: true," + // Changed to true to maintain aspect ratio
+    "       aspectRatio: 1.67," + // This matches your desired ratio (623/374 ≈ 1.67)
     "       scales: {" +
     "           y: {" +
     "               min: 40," +
@@ -63,4 +71,4 @@ public class DummyChart {
     "       }" +
     "   }" +
     "});";
-}
+ }

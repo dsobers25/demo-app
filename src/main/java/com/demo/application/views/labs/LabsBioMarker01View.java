@@ -237,7 +237,7 @@ class LabsBioMarker01View extends VerticalLayout {
             discussLabSectionDiv.getStyle()
                             // .set("max-width", "60%")
                             .set("background-color", "#e7f5e9")
-                            .set("max-height", "25%")
+                            // .set("max-height", "25%")
                             .set("margin-bottom", "12px")
                             .set("margin-top", "30px")
                             .set("padding", "16px")
