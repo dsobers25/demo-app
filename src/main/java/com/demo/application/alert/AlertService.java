@@ -53,25 +53,16 @@ public class AlertService {
     
         // Set icon color and SVG based on status
         if (alert.getStatus().isEmpty()) {
-            iconColor = "rgb(22, 163, 74)"; // green-600 #16a34a
-            iconSvg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='#16a34a' class='w-5 h-5'>" +
-                      "<path fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z'></path>" +
+            iconSvg = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>" +
+                      "<path d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z' fill='#16a34a'/>" + // Green with hex color
                       "</svg>";
-        // } else if (alert.getStatus().equals("LOW")) {
-        //     iconColor = "rgb(37, 99, 235)"; // blue
-        //     iconSvg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>" +
-        //               "<circle cx='12' cy='12' r='10' fill='currentColor'/>" +
-        //               "<path d='M12 8v5' stroke='white' stroke-width='2' stroke-linecap='round'/>" +
-        //               "<circle cx='12' cy='16' r='1' fill='white'/>" +
-        //               "</svg>";
-        } else {
-            iconColor = "rgb(220, 38, 38)"; // red
-            iconSvg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>" +
-                      "<circle cx='12' cy='12' r='10' fill='rgb(220, 38, 38)'/>" +
-                      "<path d='M12 8v5' stroke='white' stroke-width='2' stroke-linecap='round'/>" +
-                      "<circle cx='12' cy='16' r='1' fill='white'/>" +
+         } else {
+            iconSvg = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>" +
+                      "<circle cx='12' cy='12' r='10' fill='#DC2626'/>" + // Red with hex color
+                      "<path d='M12 8v5' stroke='#FFFFFF' stroke-width='2' stroke-linecap='round'/>" +
+                      "<circle cx='12' cy='16' r='1' fill='#FFFFFF'/>" +
                       "</svg>";
-        }
+         }
     
         // Set up the alert icon container
         alertIcon.getElement().setProperty("innerHTML", iconSvg);
@@ -80,7 +71,7 @@ public class AlertService {
             .set("align-items", "center")
             .set("width", "24px")
             .set("height", "24px")
-            .set("color", iconColor)
+            // .set("color", iconColor)
             .set("line-height", "0")
             .set("flex-shrink", "0");
     

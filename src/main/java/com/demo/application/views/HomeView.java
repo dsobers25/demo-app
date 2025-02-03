@@ -2,6 +2,7 @@ package com.demo.application.views;
 
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
@@ -29,7 +30,7 @@ public class HomeView extends VerticalLayout {
         mainContainer.setSizeFull();
         
         // Add the header
-        DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
+        // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
         
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
@@ -47,8 +48,11 @@ public class HomeView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
+        
+        
         add(mainContainer);
+                
     }
 
     private Component createLeftContent() {
@@ -141,8 +145,10 @@ public class HomeView extends VerticalLayout {
         Paragraph learnMore = new Paragraph("Click here to learn more →");
         learnMore.getStyle()
             .set("margin", "16px 0 0 0")  // Top margin to separate from content
+            .set("cursor", "pointer")
             .set("align-self", "flex-end");  // Align to the right
-        
+        learnMore.addClickListener(e -> UI.getCurrent().navigate("labs/new"));
+    
         contentDiv.add(mainText, subText);
         topItem.add(contentDiv, learnMore);
 
@@ -203,6 +209,10 @@ public class HomeView extends VerticalLayout {
 
         scrollContainer.add(topSectionDiv);
         scrollContainer.add(bottomSectionDiv);
+
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
 
         rightWrapper.add(scrollContainer);
         return rightWrapper;

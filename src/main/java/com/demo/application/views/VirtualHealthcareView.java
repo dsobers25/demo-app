@@ -7,6 +7,7 @@ package com.demo.application.views;
 
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.details.Details;
@@ -40,8 +41,6 @@ class VirtualHealthcareView extends VerticalLayout {
         mainContainer.setSizeFull();
         
         // Add the header
-        // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        DynamicHeader header = new DynamicHeader("Need a doctor?", "Talk to one online!");
         
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
@@ -59,8 +58,9 @@ class VirtualHealthcareView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
+        add(SpacerUtility.createSpacer());
     }
 
     private Component createLeftContent() {
@@ -72,8 +72,8 @@ class VirtualHealthcareView extends VerticalLayout {
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
             .set("flex-direction", "column")
-            .set("margin", "0")
-            .set("padding-right", "16px"); // Add padding to the right side
+            .set("margin", "0");
+            // .set("padding-right", "16px"); // Add padding to the right side
 
 
         // Get the original left side content
@@ -247,8 +247,11 @@ class VirtualHealthcareView extends VerticalLayout {
                 openRecuroHealthButton.addClickListener(e -> UI.getCurrent().navigate("/recuro-health"));
 
         
-        rightWrapper.add(scrollContainer);
-        rightWrapper.add(openRecuroHealthButton);
+                scrollContainer.add(SpacerUtility.createSpacer());
+                scrollContainer.add(openRecuroHealthButton);
+                scrollContainer.add(SpacerUtility.createSpacer());
+                scrollContainer.add(SpacerUtility.createSpacer());
+                rightWrapper.add(scrollContainer);
         return rightWrapper;
     }
 }

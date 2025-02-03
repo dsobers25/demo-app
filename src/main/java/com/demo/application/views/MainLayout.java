@@ -1,5 +1,6 @@
 package com.demo.application.views;
 
+import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav2;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -10,15 +11,21 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import java.util.HashMap;
 import java.util.Map;
 
+// @Layout
+// @AnonymousAllowed
 @Layout
 @AnonymousAllowed
-public class MainLayout extends AppLayout {
+public class MainLayout extends AppLayout implements BeforeEnterObserver {
+    // ... rest of your code
     
     private static Map<String, Div> navItems = new HashMap<>();
     private Div overlay;
@@ -26,11 +33,28 @@ public class MainLayout extends AppLayout {
     private Div slideOutMenu;
     private Div slideUpMenu;
     
+    private DynamicHeader dynamicHeader;
+
     public MainLayout() {
         setupOverlayAndMenu();
         setupOverlayAndChat();
         setupFloatingChatButton();
-        addToNavbar(createHeaderContent());
+        
+        // Create a wrapper for both headers
+    VerticalLayout headerWrapper = new VerticalLayout();
+    headerWrapper.setPadding(false);
+    headerWrapper.setSpacing(false);
+    headerWrapper.setWidth("100%");
+    
+    // Initialize header
+    dynamicHeader = new DynamicHeader("", "");
+    
+    // Add both headers to wrapper
+    headerWrapper.add(createHeaderContent());
+    headerWrapper.add(dynamicHeader);
+    
+    // Add wrapper to navbar
+    addToNavbar(headerWrapper);
     }
 
     private void setupOverlayAndMenu() {
@@ -503,6 +527,47 @@ public class MainLayout extends AppLayout {
         header.add(mainContainer);
         
         return header;
+    }
+
+     @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        String route = event.getLocation().getPath();
+        updateDynamicHeader(route);
+    }
+
+    private void updateDynamicHeader(String route) {
+        if (route.startsWith("labs")) {
+            Image labcorp = new Image("./images/Labcorp_Logo.svg", "labcorp");
+            dynamicHeader.updateContent("Need a lab?", "See your results online!", labcorp);
+        } else if (route.startsWith("benefits")) {
+            dynamicHeader.updateContent("You've got benefits", "Let's us explain them!");
+        } // home
+        else if (route.equals("")) {
+            dynamicHeader.updateContent("Welcome John!", "What can we do for you today?");
+        } // virtual healthcare
+        else if (route.startsWith("virtual-healthcare")) {
+            dynamicHeader.updateContent("Need a doctor", "Talk to one online!");
+        } // behavioral healthcare
+        else if (route.startsWith("behavioral-healthcare")) {
+            dynamicHeader.updateContent("Need a counselor?", "Talk to one online!");
+        } // cards
+         else if (route.startsWith("cards")) {
+            dynamicHeader.updateContent("You've got cards!", "Let us explain them!");
+        }  // other
+        else if (route.startsWith("health-navigator")) {
+
+            Image sunLife = new Image("./images/Sun_Life_weblogo_127x31.svg", "sun-life");
+            dynamicHeader.updateContent("Got a problem?", "We've got your back!", sunLife);
+        } // profile
+        else if (route.startsWith("profile")) {
+           dynamicHeader.updateContent("You're profile!", "some text here");
+       }// enrollment
+       else if (route.startsWith("enrollment")) {
+        dynamicHeader.updateContent("Updating your benefits?", "You can change your benefit enrollment here!");
+    }
+        // "Updating your benefits?", "You can change your benefit enrollment here!"
+        
+        // "You've got benefits", "Let's us explain them!"
     }
 
     private Div createNavItem(String text, String route) {

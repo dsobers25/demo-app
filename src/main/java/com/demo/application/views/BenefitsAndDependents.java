@@ -10,6 +10,7 @@ package com.demo.application.views;
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
 import com.demo.application.views.utils.EnrollmentSection;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -38,7 +39,7 @@ public class BenefitsAndDependents extends VerticalLayout {
          mainContainer.setSizeFull();
          
          // Add the header
-         DynamicHeader header = new DynamicHeader("Updating your benefits?", "You can change your benefit enrollment here!");
+        //  DynamicHeader header = new DynamicHeader("Updating your benefits?", "You can change your benefit enrollment here!");
          // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
          
          // Create content wrapper for the scrollable areas
@@ -57,7 +58,7 @@ public class BenefitsAndDependents extends VerticalLayout {
          
          contentWrapper.add(leftContent, rightContent);
          
-         mainContainer.add(header, contentWrapper);
+         mainContainer.add(contentWrapper);
          add(mainContainer);
      }
  
@@ -285,7 +286,7 @@ public class BenefitsAndDependents extends VerticalLayout {
         // Create and add the enrollment section
         EnrollmentSection enrollmentSection = new EnrollmentSection(sections);
         scrollContainer.add(enrollmentSection);  // Add to your layout
-        scrollContainer.add(createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
 
 
         // Create second enrollment sections data
@@ -311,7 +312,7 @@ public class BenefitsAndDependents extends VerticalLayout {
         // Create and add the enrollment section
         EnrollmentSection enrollmentSection2 = new EnrollmentSection(sections2);
         scrollContainer.add(enrollmentSection2);  // Add to your layout
-        scrollContainer.add(createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
 
 
         // Create lab testing enrollment sections data
@@ -350,19 +351,11 @@ public class BenefitsAndDependents extends VerticalLayout {
         EnrollmentSection enrollmentSection3 = new EnrollmentSection(sections3);
         scrollContainer.add(enrollmentSection3);  // Add to your layout
 
-        scrollContainer.add(createSpacer());
-        scrollContainer.add(createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
 
  
          rightWrapper.add(scrollContainer);
          return rightWrapper;
      }
-
-     private Div createSpacer() {
-        Div spacer = new Div();
-        spacer.getStyle()
-            .set("height", "40px")
-            .set("width", "100%");
-        return spacer;
-    }
  }

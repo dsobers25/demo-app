@@ -34,7 +34,7 @@ public class CardsVisionView  extends VerticalLayout {
             
             // Add the header
             // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-            DynamicHeader header = new DynamicHeader("You've got cards!", "Let us explain them!");
+            // DynamicHeader header = new DynamicHeader("You've got cards!", "Let us explain them!");
             
             // Create content wrapper for the scrollable areas
             HorizontalLayout contentWrapper = new HorizontalLayout();
@@ -52,7 +52,7 @@ public class CardsVisionView  extends VerticalLayout {
             
             contentWrapper.add(leftContent, rightContent);
             
-            mainContainer.add(header, contentWrapper);
+            mainContainer.add(contentWrapper);
             add(mainContainer);
         }
     

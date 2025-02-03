@@ -9,6 +9,7 @@ import com.demo.application.alert.AlertService;
 import com.demo.application.history.TestHistoryService;
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
@@ -42,7 +43,7 @@ class LabsView extends VerticalLayout {
         Image labcorp = new Image("./images/Labcorp_Logo.svg", "labcorp");
         
         // Add the header
-        DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!", labcorp);
+        // DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!", labcorp);
         // DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!");
         // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
         
@@ -62,7 +63,7 @@ class LabsView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 
@@ -75,8 +76,8 @@ class LabsView extends VerticalLayout {
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
             .set("flex-direction", "column")
-            .set("margin", "0")
-            .set("padding-right", "16px"); // Add padding to the right side
+            .set("margin", "0");
+            // .set("padding-right", "16px"); // Add padding to the right side
 
 
         // Get the original left side content
@@ -221,6 +222,10 @@ class LabsView extends VerticalLayout {
         scrollContainer.add(TestHistoryService.createTestHistoryDiv(test))
         );
         
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+
         // Add test content
         // for (int i = 0; i < 20; i++) {
         //     scrollContainer.add(new Div("Scroll content " + i));

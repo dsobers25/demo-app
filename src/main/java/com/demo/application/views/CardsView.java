@@ -7,6 +7,7 @@ package com.demo.application.views;
 
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.CardsSideNav;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
@@ -34,10 +35,6 @@ class CardsView extends VerticalLayout {
         mainContainer.setSpacing(false);
         mainContainer.setSizeFull();
         
-        // Add the header
-        DynamicHeader header = new DynamicHeader("You've got cards!", "Let us explain them!");
-        // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
         contentWrapper.setHeightFull();
@@ -54,7 +51,7 @@ class CardsView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 
@@ -67,8 +64,8 @@ class CardsView extends VerticalLayout {
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
             .set("flex-direction", "column")
-            .set("margin", "0")
-            .set("padding-right", "16px"); // Add padding to the right side
+            .set("margin", "0 32px 0 0");
+            // .set("padding-right", "16px"); // Add padding to the right side
 
 
         // Get the original left side content
@@ -156,6 +153,9 @@ class CardsView extends VerticalLayout {
         );
 
         scrollContainer.add(cardsSectionDiv);
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+                
 
         rightWrapper.add(scrollContainer);
         return rightWrapper;
@@ -164,101 +164,175 @@ class CardsView extends VerticalLayout {
 
     // Add this helper method to your class
     private Div createServiceCard(String title) {
-        Div card = new Div();
-        card.getStyle()
+        // Create the main flip container
+        Div flipContainer = new Div();
+        flipContainer.addClassName("flip-container");
+        flipContainer.getStyle()
+            .set("perspective", "2000px")
+            .set("width", "100%")
+            .set("max-width", "340px")
+            .set("height", "220px")
+            .set("margin-bottom", "30px")
+            .set("transform-style", "preserve-3d")
             .set("position", "relative")
-            .set("box-sizing", "border-box")
+            .set("padding", "0"); // Remove any default padding
+    
+        // Create the flipper element
+        Div flipper = new Div();
+        flipper.addClassName("flipper");
+        flipper.getStyle()
+            .set("position", "relative")
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("transition", "transform 0.6s")
+            .set("transform-style", "preserve-3d")
+            .set("transform-origin", "right center") // Change origin to right side
+            .set("margin", "0") // Remove any margins
+            .set("padding", "0"); // Remove any padding
+    
+        // Front of card
+        Div front = new Div();
+        front.addClassName("front");
+        front.getStyle()
+            .set("position", "absolute")
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("backface-visibility", "hidden")
             .set("border-radius", "16px")
             .set("border", "1px solid #E6E5E5")
-            .set("padding", "0px")       // Reduced padding
-            .set("width", "100%")  // Make card width match column
-            .set("max-width", "340px") // Prevent too wide
-            .set("margin-bottom", "30px"); // Center in column
-
-        
-        
+            .set("background", "white")
+            .set("overflow", "hidden") // Prevent image overflow
+            .set("display", "flex") // Use flex to center image
+            .set("align-items", "center")
+            .set("justify-content", "center");
+    
+        // Back of card
+        Div back = new Div();
+        back.addClassName("back");
+        back.getStyle()
+            .set("position", "absolute")
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("backface-visibility", "hidden")
+            .set("transform", "rotateY(180deg)")
+            .set("border-radius", "16px")
+            .set("border", "1px solid #E6E5E5")
+            .set("background", "white")
+            .set("overflow", "hidden") // Prevent content overflow
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("justify-content", "center")
+            .set("align-items", "center");
+    
+        // Add content to front
+        Image cardImage = new Image();
+        cardImage.setWidth("100%");
+        cardImage.setHeight("100%");
+        cardImage.getStyle()
+            .set("border-radius", "16px")
+            .set("object-fit", "contain")
+            .set("object-position", "center")
+            .set("padding", "0") // Remove any padding
+            .set("display", "block"); // Prevent image spacing issues
+    
+        // Set image based on card type
         switch (title) {
             case "View Health Insurance card":
-            Image svgImage = new Image("https://demo.virtualwellness.care/assets/images/health-insurance-card.png", "vision card");
-                    svgImage.setWidth("100%");
-                    svgImage.setMaxWidth("340px");
-                    svgImage.getStyle()
-                    .set("border-radius", "16px 16px 0 0"); // Match card's top corners
-                    card.add(svgImage);
-
+                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/health-insurance-card.png");
                 break;
             case "View Dental card":
-            Image svgImage2 = new Image("https://demo.virtualwellness.care/assets/images/dental-card.png", "vision card");
-                svgImage2.setWidth("100%");
-                svgImage2.setMaxWidth("340px");
-                svgImage2.getStyle()
-                .set("border-radius", "16px 16px 0 0"); 
-                card.add(svgImage2);
-
+                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/dental-card.png");
                 break;
             case "View Vision card":
-            Image svgImage3 = new Image("https://demo.virtualwellness.care/assets/images/vision-card.png", "vision card");
-                    svgImage3.setWidth("100%");
-                    svgImage3.setMaxWidth("340px");
-                    svgImage3.getStyle()
-                    .set("border-radius", "16px 16px 0 0"); 
-                    card.add(svgImage3);
-            break;
+                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/vision-card.png");
+                break;
             case "View Prescription Savings card":
-            Image svgImage4 = new Image("https://demo.virtualwellness.care/assets/images/prescription-card.png", "vision card");
-                    svgImage4.setWidth("100%");
-                    svgImage4.setMaxWidth("340px");
-                    svgImage4.getStyle()
-                    .set("border-radius", "16px 16px 0 0"); 
-                    card.add(svgImage4);
-            break;
+                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/prescription-card.png");
+                break;
             case "View Health Navigator card":
-            Image svgImage5 = new Image("https://demo.virtualwellness.care/assets/images/health-navigator-card.png", "vision card");
-                    svgImage5.setWidth("100%");
-                    svgImage5.setMaxWidth("340px");
-                    svgImage5.getStyle()
-                    .set("border-radius", "16px 16px 0 0"); 
-                    card.add(svgImage5);
-            break;
+                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/health-navigator-card.png");
+                break;
         }
-        
-        // svgImage.getElement().addEventListener("click", e -> {
-        //     UI.getCurrent().navigate("");
-        // });
-        
-            String linkText = title;
-
-            Paragraph learnMore = new Paragraph(linkText + " →");
-            learnMore.getStyle()
-            .set("position", "relative")
-            .set("display", "block") // Makes paragraph block-level
-            .set("text-align", "center") // Center the text
-            .set("padding", "10px") // Add some padding
-            .set("font-size", "14px")
-            .set("cursor", "pointer"); // Add cursor pointer to show it's clickable
-        
-            // Add click listener based on the title/linkText
-            learnMore.addClickListener(e -> {
-                switch (title) {
-                    case "View Health Insurance card":
-                        UI.getCurrent().navigate("cards/health-insurance");
-                        break;
-                    case "View Dental card":
-                        UI.getCurrent().navigate("cards/dental");
-                        break;
-                    case "View Vision card":
-                        UI.getCurrent().navigate("cards/vision");
-                        break;
-                    case "View Prescription Savings card":
-                        UI.getCurrent().navigate("cards/prescription-savings");
-                        break;
-                    case "View Health Navigator card":
-                        UI.getCurrent().navigate("cards/health-navigator");
-                        break;
-                }
-            });
-
-        card.add(learnMore);
-        return card;
+    
+        // Create overlay for back content
+        Div overlay = new Div();
+        overlay.getStyle()
+            .set("position", "absolute")
+            .set("top", "0")
+            .set("left", "0")
+            .set("width", "100%")
+            .set("height", "100%")
+            .set("background", "rgba(0, 0, 0, 0.7)")
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("justify-content", "center")
+            .set("align-items", "center")
+            .set("padding", "20px");
+    
+        // Style title and button
+        H5 cardTitle = new H5(title);
+        cardTitle.getStyle()
+            .set("margin", "0 0 15px 0")
+            .set("text-align", "center")
+            .set("color", "white");
+    
+        Paragraph viewButton = new Paragraph("View Card →");
+        viewButton.getStyle()
+            .set("cursor", "pointer")
+            .set("padding", "10px 20px")
+            .set("background", "var(--lumo-primary-color)")
+            .set("color", "white")
+            .set("border-radius", "8px")
+            .set("margin", "0");
+    
+        // Add click navigation
+        viewButton.addClickListener(e -> {
+            switch (title) {
+                case "View Health Insurance card":
+                    UI.getCurrent().navigate("cards/health-insurance");
+                    break;
+                case "View Dental card":
+                    UI.getCurrent().navigate("cards/dental");
+                    break;
+                case "View Vision card":
+                    UI.getCurrent().navigate("cards/vision");
+                    break;
+                case "View Prescription Savings card":
+                    UI.getCurrent().navigate("cards/prescription-savings");
+                    break;
+                case "View Health Navigator card":
+                    UI.getCurrent().navigate("cards/health-navigator");
+                    break;
+            }
+        });
+    
+        // Create a duplicate image for the back
+        Image backImage = new Image();
+        backImage.setWidth("100%");
+        backImage.setHeight("100%");
+        backImage.getStyle()
+            .set("object-fit", "contain")
+            .set("object-position", "center");
+        backImage.setSrc(cardImage.getSrc());
+    
+        // Assemble the card
+        front.add(cardImage);
+        overlay.add(cardTitle, viewButton);
+        back.add(backImage, overlay);
+        flipper.add(front, back);
+        flipContainer.add(flipper);
+    
+        // Add hover effect using JavaScript with modified transform
+        UI.getCurrent().getPage().executeJs(
+            "const container = $0;" +
+            "const flipper = container.querySelector('.flipper');" +
+            "container.addEventListener('mouseenter', () => {" +
+            "    flipper.style.transform = 'translateX(-100%) rotateY(180deg)';" +
+            "});" +
+            "container.addEventListener('mouseleave', () => {" +
+            "    flipper.style.transform = 'translateX(0) rotateY(0deg)';" +
+            "});", flipContainer.getElement());
+    
+        return flipContainer;
     }
 }

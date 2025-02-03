@@ -42,10 +42,6 @@ class LabsBioMarker01View extends VerticalLayout {
         mainContainer.setSpacing(false);
         mainContainer.setSizeFull();
         
-        // Add the header
-        DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!");
-        // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
         contentWrapper.setHeightFull();
@@ -62,7 +58,7 @@ class LabsBioMarker01View extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 

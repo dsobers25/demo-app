@@ -7,6 +7,7 @@ package com.demo.application.views;
 
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.SideNav;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
@@ -58,7 +59,7 @@ class HealthNavigatorView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 
@@ -71,8 +72,8 @@ class HealthNavigatorView extends VerticalLayout {
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
             .set("flex-direction", "column")
-            .set("margin", "0")
-            .set("padding-right", "16px"); // Add padding to the right side
+            .set("margin", "0");
+            // .set("padding-right", "16px"); // Add padding to the right side
 
 
         // Get the original left side content
@@ -211,6 +212,11 @@ class HealthNavigatorView extends VerticalLayout {
         // for (int i = 0; i < 20; i++) {
         //     scrollContainer.add(new Div("Scroll content " + i));
         // }
+
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+
 
         rightWrapper.add(scrollContainer);
         return rightWrapper;

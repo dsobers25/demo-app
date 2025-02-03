@@ -27,7 +27,6 @@ class LabsTestHistoryView extends VerticalLayout {
         mainContainer.setSpacing(false);
         mainContainer.setSizeFull();
         
-        DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!");
         
         HorizontalLayout contentWrapper = new HorizontalLayout();
         contentWrapper.setHeightFull();
@@ -42,7 +41,7 @@ class LabsTestHistoryView extends VerticalLayout {
         Component rightContent = createRightContent();
         
         contentWrapper.add(leftContent, rightContent);
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 

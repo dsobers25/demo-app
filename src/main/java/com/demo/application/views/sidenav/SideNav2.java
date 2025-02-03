@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
@@ -79,7 +80,7 @@ public class SideNav2 {
             textContainer.getStyle().set("padding-left", "8px")
                 .set("width", "100%");  // Make text container take full width
     
-            Paragraph homeMainText = new Paragraph("Homie");
+            Paragraph homeMainText = new Paragraph("Home");
             Icon arrow = new Icon(VaadinIcon.ARROW_RIGHT);
             Paragraph homeSubText = new Paragraph("Start here");
     
@@ -460,6 +461,11 @@ public class SideNav2 {
                 .set("cursor", "pointer");
             leftContainer.add(div);
         }
+
+        // scrollContainer.add(SpacerUtility.createSpacer());
+        // leftContainer.add(SpacerUtility.createSpacer());
+        // leftContainer.add(SpacerUtility.createSpacer());
+
 
         return leftContainer;
     }

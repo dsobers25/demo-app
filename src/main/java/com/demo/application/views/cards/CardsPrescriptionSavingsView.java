@@ -52,7 +52,7 @@ public class CardsPrescriptionSavingsView  extends VerticalLayout {
                 
                 contentWrapper.add(leftContent, rightContent);
                 
-                mainContainer.add(header, contentWrapper);
+                mainContainer.add(contentWrapper);
                 add(mainContainer);
             }
         

@@ -7,6 +7,7 @@ package com.demo.application.views;
 
 import com.demo.application.views.header.DynamicHeader;
 import com.demo.application.views.sidenav.BenefitsSideNav;
+import com.demo.application.views.utils.SpacerUtility;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
@@ -54,7 +55,7 @@ class BenefitsView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 
@@ -67,8 +68,8 @@ class BenefitsView extends VerticalLayout {
             .set("overflow", "hidden") // Hide wrapper overflow
             .set("display", "flex")
             .set("flex-direction", "column")
-            .set("margin", "0")
-            .set("padding-right", "16px"); // Add padding to the right side
+            .set("margin", "0");
+            // .set("padding-right", "16px"); // Add padding to the right side
 
 
         // Get the original left side content
@@ -231,6 +232,10 @@ class BenefitsView extends VerticalLayout {
         spacer.getStyle().set("height", "40px");
 
         scrollContainer.add(spacer);
+
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
+        scrollContainer.add(SpacerUtility.createSpacer());
 
 
         rightWrapper.add(scrollContainer);

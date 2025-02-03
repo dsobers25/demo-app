@@ -43,10 +43,6 @@ class LabNewsView extends VerticalLayout {
         mainContainer.setSpacing(false);
         mainContainer.setSizeFull();
         
-        // Add the header
-        DynamicHeader header = new DynamicHeader("Need a lab?", "See your results online!");
-        // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
-        
         // Create content wrapper for the scrollable areas
         HorizontalLayout contentWrapper = new HorizontalLayout();
         contentWrapper.setHeightFull();
@@ -63,7 +59,7 @@ class LabNewsView extends VerticalLayout {
         
         contentWrapper.add(leftContent, rightContent);
         
-        mainContainer.add(header, contentWrapper);
+        mainContainer.add(contentWrapper);
         add(mainContainer);
     }
 
@@ -140,7 +136,7 @@ class LabNewsView extends VerticalLayout {
         // license-counselor
         Div barcodeDiv = new Div();
         barcodeDiv.getStyle()
-                            .set("width", "fit-content")
+                            .set("max-width", "fit-content")
                             .set("height", "auto")
                             .set("margin-bottom", "12px")
                             .set("margin-top", "12px")
@@ -148,6 +144,9 @@ class LabNewsView extends VerticalLayout {
                             .set("border-radius", "16px 16px 16px 16px")
                             .set("border", "1px solid #E6E5E5");
         Image barcodeImg = new Image("./images/barcode.png", "labs-barcode");
+        barcodeImg.getStyle()
+        .set("width", "100%")
+        .set("height", "100%");
         barcodeDiv.add(barcodeImg);
 
         // Add all components to the div

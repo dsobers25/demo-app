@@ -36,7 +36,7 @@ public class ProfileView extends VerticalLayout {
          mainContainer.setSizeFull();
          
          // Add the header
-         DynamicHeader header = new DynamicHeader("You're profile!", "some text here");
+        //  DynamicHeader header = new DynamicHeader("You're profile!", "some text here");
          // DynamicHeader header = new DynamicHeader("Welcome John!", "What can we do for you today?");
          
          // Create content wrapper for the scrollable areas
@@ -55,7 +55,7 @@ public class ProfileView extends VerticalLayout {
          
          contentWrapper.add(leftContent, rightContent);
          
-         mainContainer.add(header, contentWrapper);
+         mainContainer.add(contentWrapper);
          add(mainContainer);
      }
  
