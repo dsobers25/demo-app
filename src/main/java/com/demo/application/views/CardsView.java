@@ -238,19 +238,19 @@ class CardsView extends VerticalLayout {
         // Set image based on card type
         switch (title) {
             case "View Health Insurance card":
-                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/health-insurance-card.png");
+                cardImage.setSrc("./images/health-insurance-card.png");
                 break;
             case "View Dental card":
-                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/dental-card.png");
+                cardImage.setSrc("./images/dental-card.png");
                 break;
             case "View Vision card":
-                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/vision-card.png");
+                cardImage.setSrc("./images/vision-card.png");
                 break;
             case "View Prescription Savings card":
-                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/prescription-card.png");
+                cardImage.setSrc("./images/prescription-card.png");
                 break;
             case "View Health Navigator card":
-                cardImage.setSrc("https://demo.virtualwellness.care/assets/images/health-navigator-card.png");
+                cardImage.setSrc("./images/health-navigator-card.png");
                 break;
         }
     
