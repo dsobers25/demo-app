@@ -250,43 +250,6 @@ public class CardsHealthNavigator  extends VerticalLayout {
             break;
         }
         
-        // svgImage.getElement().addEventListener("click", e -> {
-        //     UI.getCurrent().navigate("");
-        // });
-        
-            String linkText = title;
-
-            Paragraph learnMore = new Paragraph(linkText + " →");
-            learnMore.getStyle()
-            .set("position", "relative")
-            .set("display", "block") // Makes paragraph block-level
-            .set("text-align", "center") // Center the text
-            .set("padding", "10px") // Add some padding
-            .set("font-size", "14px")
-            .set("cursor", "pointer"); // Add cursor pointer to show it's clickable
-        
-            // Add click listener based on the title/linkText
-            learnMore.addClickListener(e -> {
-                switch (title) {
-                    case "View Health Insurance card":
-                        UI.getCurrent().navigate("benefits/health-insurance");
-                        break;
-                    case "View Dental card":
-                        UI.getCurrent().navigate("cards/dental");
-                        break;
-                    case "View Vision card":
-                        UI.getCurrent().navigate("cards/vision");
-                        break;
-                    case "View Prescription Savings card":
-                        UI.getCurrent().navigate("cards/prescription-savings");
-                        break;
-                    case "View Health Navigator card":
-                        UI.getCurrent().navigate("cards/health-navigator");
-                        break;
-                }
-            });
-
-        card.add(learnMore);
         return card;
     }
 
